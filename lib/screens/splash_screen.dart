@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:momsori/screens/main_screen.dart';
+import 'package:momsori/screens/tutorial_screen.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -13,9 +14,10 @@ class SplashScreen extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      nextScreen: MainScreen(),
+      nextScreen: TutorialScreen(),
       duration: 2000,
       splashTransition: SplashTransition.fadeTransition,
+      pageTransitionType: PageTransitionType.fade,
     );
   }
 }
