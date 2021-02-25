@@ -33,6 +33,12 @@ dependencies:
   animated_splash_screen: ^1.0.1+2
   intl: ^0.16.0
   page_transition: ^1.1.7+6
+  kakao_flutter_sdk: ^0.5.4
+  dio:
+  json_annotation:
+  shared_preferences:
+  platform:
+  package_info:
 
 
 dev_dependencies:
