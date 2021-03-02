@@ -1,7 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:momsori/screens/login_screen.dart';
 import 'package:page_transition/page_transition.dart';
+
+import 'tutorial_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -11,11 +12,11 @@ class SplashScreen extends StatelessWidget {
         'SplashScreen\n2초 후에 넘어갑니다',
         style: TextStyle(
           fontSize: 32.0,
-          fontWeight: FontWeight.bold,
+          fontFamily: 'NotoSansKR',
         ),
       ),
-      // nextScreen: TutorialScreen(),
-      nextScreen: LoginScreen(),
+      nextScreen: TutorialScreen(),
+      // nextScreen: LoginScreen(),
       duration: 2000,
       splashTransition: SplashTransition.fadeTransition,
       pageTransitionType: PageTransitionType.fade,

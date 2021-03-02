@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -104,17 +105,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Container(
                         width: 80,
                         height: 80,
-                        child: RaisedButton(
-                          onPressed: () {
-                            print('녹음버튼');
-                          },
-                          color: Color(0xFFF48FB1),
-                          child: Center(
-                            child: Text(
-                              '녹음',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                        child: ButtonTheme(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              22.0,
+                            ),
+                          ),
+                          child: RaisedButton(
+                            onPressed: () {
+                              Get.defaultDialog(
+                                title: '녹음 횟수 초과!',
+                                middleText: '하루 녹음 횟수를 초과했습니다 :)',
+                                confirm: FlatButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  child: Text('확인'),
+                                ),
+                              );
+                            },
+                            color: Color(0xFFFFA9A9),
+                            child: Center(
+                              child: Icon(
+                                Icons.mic_sharp,
+                                color: Colors.white,
+                                size: 40,
                               ),
                             ),
                           ),

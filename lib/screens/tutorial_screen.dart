@@ -53,33 +53,60 @@ class _TutorialScreenState extends State<TutorialScreen> {
                 });
               },
             ),
-            Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(
-                    top: height * 0.8,
-                    left: width * 0.42,
-                  ),
-                  child: _myCircleStatus(_index),
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    Get.to(
-                      NicknameScreen(),
-                      transition: Transition.fadeIn,
-                    );
-                  },
-                  child: _index == 2
-                      ? Text(
-                          '시작하기',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        )
-                      : Text(
-                          '다음',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+            _index != 2
+                ? Container(
+                    padding: EdgeInsets.all(10),
+                    alignment: Alignment.topRight,
+                    child: RaisedButton(
+                      color: Color(0xFFFFA9A9),
+                      onPressed: () {
+                        print('스킵버튼');
+                        Get.to(
+                          NicknameScreen(),
+                          transition: Transition.fade,
+                        );
+                      },
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
-                ),
-              ],
+                      ),
+                    ),
+                  )
+                : Text(''),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      top: height * 0.8,
+                      left: width * 0.42,
+                    ),
+                    child: _myCircleStatus(_index),
+                  ),
+                  _index == 2
+                      ? RaisedButton(
+                          color: Color(0xFFFFA9A9),
+                          onPressed: () {
+                            Get.to(
+                              NicknameScreen(),
+                              transition: Transition.fadeIn,
+                            );
+                          },
+                          child: Text(
+                            '시작하기',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        )
+                      : Text(''),
+                ],
+              ),
             )
           ],
         ),
