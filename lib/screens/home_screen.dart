@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:momsori/screens/recoder_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -113,16 +114,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: RaisedButton(
                             onPressed: () {
-                              Get.defaultDialog(
-                                title: '녹음 횟수 초과!',
-                                middleText: '하루 녹음 횟수를 초과했습니다 :)',
-                                confirm: FlatButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  child: Text('확인'),
-                                ),
-                              );
+                              // Get.defaultDialog(
+                              //   title: '녹음 횟수 초과!',
+                              //   middleText: '하루 녹음 횟수를 초과했습니다 :)',
+                              //   confirm: FlatButton(
+                              //     onPressed: () {
+                              //       Get.back();
+                              //     },
+                              //     child: Text('확인'),
+                              //   ),
+                              // );
+                              Get.to(RecoderScreen());
                             },
                             color: Color(0xFFFFA9A9),
                             child: Center(

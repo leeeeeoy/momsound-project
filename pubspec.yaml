@@ -63,6 +63,10 @@ flutter:
     - assets/images/google_logo.png
     - assets/images/kakao_logo.png
     - assets/images/naver_logo.jpg
+    - assets/icons/pause.png
+    - assets/icons/play.png
+    - assets/icons/record_start_icon.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

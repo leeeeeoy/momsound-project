@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         const Locale('ko', 'KR'),
       ],
+      debugShowCheckedModeBanner: false,
     );
   }
 }
