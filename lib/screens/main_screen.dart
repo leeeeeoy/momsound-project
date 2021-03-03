@@ -21,10 +21,10 @@ class _MainScreenState extends State<MainScreen> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.grey,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white.withOpacity(.60),
-          selectedFontSize: 14,
+          backgroundColor: Colors.white,
+          selectedItemColor: Color(0xFFFFA9A9),
+          unselectedItemColor: Colors.grey,
+          selectedFontSize: 16,
           unselectedFontSize: 14,
           currentIndex: _selectedIndex,
           onTap: (index) {
@@ -39,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
             BottomNavigationBarItem(
               label: 'Diary',
-              icon: Icon(Icons.menu_book_outlined),
+              icon: Icon(Icons.calendar_today),
             ),
             BottomNavigationBarItem(
               label: 'Storage',
@@ -47,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
             BottomNavigationBarItem(
               label: 'Menu',
-              icon: Icon(Icons.account_circle_rounded),
+              icon: Icon(Icons.settings),
             ),
           ],
         ),

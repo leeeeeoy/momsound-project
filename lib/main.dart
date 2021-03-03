@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Momsori',
       theme: ThemeData(
-        primaryColor: Colors.pinkAccent,
+        primaryColor: Color(0xFFFFA9A9),
       ),
       home: SplashScreen(),
       localizationsDelegates: [
@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         const Locale('ko', 'KR'),
       ],
+      debugShowCheckedModeBanner: false,
     );
   }
 }

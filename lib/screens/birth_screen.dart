@@ -45,10 +45,17 @@ class _BirthScreenState extends State<BirthScreen> {
                   ),
                 ),
                 RaisedButton(
+                  color: Color(0xFFFFA9A9),
                   onPressed: () {
                     Get.to(MainScreen());
                   },
-                  child: Text('다음'),
+                  child: Text(
+                    '다음',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 )
               ],
             ),
