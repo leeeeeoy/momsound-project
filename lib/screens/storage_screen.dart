@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class StorageScreen extends StatefulWidget {
   @override
@@ -8,34 +7,15 @@ class StorageScreen extends StatefulWidget {
 }
 
 class _StorageScreenState extends State<StorageScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  final myController = TextEditingController();
+
+  // final Size size = MediaQuery.of(context).size;
   var folders = [];
-
-  void flutterToastMessageLongPressed() {
-    Fluttertoast.showToast(
-      msg: 'long pressed',
-      gravity: ToastGravity.CENTER,
-      backgroundColor: Colors.redAccent,
-      fontSize: 20,
-      textColor: Colors.white,
-      toastLength: Toast.LENGTH_LONG,
-    );
-  }
-
-  void flutterToastMessageOnTaped() {
-    Fluttertoast.showToast(
-      msg: 'on taped',
-      gravity: ToastGravity.CENTER,
-      backgroundColor: Colors.redAccent,
-      fontSize: 20,
-      textColor: Colors.white,
-      toastLength: Toast.LENGTH_LONG,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
-    // final Size size = MediaQuery.of(context).size;
-
     return Padding(
       padding: EdgeInsets.all(16),
       child: Column(
@@ -46,98 +26,156 @@ class _StorageScreenState extends State<StorageScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                RaisedButton(
-                  onPressed: () {
-                    folders.add(RaisedButton(
-                      onPressed: () {},
-                      child: Text('test'),
-                    ));
-                    // folders.add();
-                    setState(() {});
-                  },
+                Container(
                   child: Text(
-                    'new folder',
+                    '저장소',
                     style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                RaisedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'edit',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
+                Row(
+                  children: [
+                    FlatButton(
+                      color: Colors.white,
+                      onPressed: () {},
+                      child: Text(
+                        '검색',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                     ),
-                  ),
+                    FlatButton(
+                      color: Colors.white,
+                      onPressed: () {
+                        folders.clear();
+                        setState(() {});
+                      },
+                      child: Text(
+                        '편집',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-          Container(
-            child: Text(
-              'Storage',
-              style: TextStyle(
-                fontSize: 64,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            child: Text(
-              'Total Storage',
-              style: TextStyle(
-                fontSize: 48,
-                fontWeight: FontWeight.bold,
-              ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 8,
+                  ),
+                  child: Container(
+                    child: ListTile(
+                      onTap: () {},
+                      title: Text(
+                        '모든 녹음 항목',
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500),
+                      ),
+                      trailing: Text(
+                        '194개',
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  child: ListTile(
+                    onTap: () {},
+                    title: Text(
+                      '카테고리',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    ),
+                    trailing: Text(
+                      '194개',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+                // Container(
+                //   child: ListView.builder(
+                //     itemBuilder: (context, index) {
+                //       return ListTile(leading: folders[index]);
+                //     },
+                //     itemCount: folders.length,
+                //   ),
+                // ),
+              ],
             ),
           ),
           Container(
             child: ListTile(
-              title: Text(
-                'title',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-              subtitle: Text('subtitle'),
-              dense: true,
               onTap: () {
-                flutterToastMessageOnTaped();
-              },
-              onLongPress: () {
                 showDialog(
                     context: context,
                     builder: (_) => CupertinoAlertDialog(
-                          title: Text('Long Press'),
-                          content: Text('Accept?'),
+                          title: Text(
+                            '폴더추가',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                          ),
+                          content: Form(
+                            key: _formKey,
+                            child: SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return '이름을 입력해 주세요.';
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                decoration: InputDecoration(
+                                    border: InputBorder.none, hintText: '폴더 추가', labelText: '폴더 추가'),
+                              ),
+                            ),
+                          ),
                           actions: [
                             CupertinoDialogAction(
-                              child: Text('yes'),
+                              child: Text(
+                                '취소',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                    color: Color.fromARGB(255, 255, 169, 169)),
+                              ),
                             ),
                             CupertinoDialogAction(
-                              child: Text('no'),
+                              onPressed: () {
+                                if(_formKey.currentState.validate()) {
+                                  Scaffold.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
+                                }
+                              },
+                              child: Text(
+                                '확인',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromARGB(255, 255, 169, 169),
+                                ),
+                              ),
                             ),
                           ],
                         ));
-
-                // flutterToastMessageLongPressed();
               },
-              selected: true,
-              trailing: Text('trailing'),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              child: ListView.builder(
-                itemBuilder: (context, index) {
-                  return ListTile(leading: folders[index]);
-                },
-                itemCount: folders.length,
-              ),
+              title: Text('+ 카테고리 추가',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
             ),
           ),
         ],
