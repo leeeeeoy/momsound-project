@@ -11,16 +11,22 @@ class _StorageScreenState extends State<StorageScreen> {
 
   final myController = TextEditingController();
 
+  // ignore: non_constant_identifier_names
+  bool editOnOff = false;
+  bool _ischecked = false;
+
   // final Size size = MediaQuery.of(context).size;
   var folders = [];
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(12),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        // mainAxisAlignment: MainAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             child: Row(
@@ -51,7 +57,11 @@ class _StorageScreenState extends State<StorageScreen> {
                     FlatButton(
                       color: Colors.white,
                       onPressed: () {
-                        folders.clear();
+                        if (!editOnOff) {
+                          editOnOff = true;
+                        } else {
+                          editOnOff = false;
+                        }
                         setState(() {});
                       },
                       child: Text(
@@ -67,55 +77,101 @@ class _StorageScreenState extends State<StorageScreen> {
               ],
             ),
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 8,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                child: ListTile(
+                  title: Text(
+                    '모든 녹음 항목',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
-                  child: Container(
-                    child: ListTile(
-                      onTap: () {},
-                      title: Text(
-                        '모든 녹음 항목',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                      trailing: Text(
-                        '194개',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
-                      ),
-                    ),
+                  subtitle: Text(
+                    '194개',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                 ),
-                Container(
-                  child: ListTile(
-                    onTap: () {},
-                    title: Text(
-                      '카테고리',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-                    ),
-                    trailing: Text(
-                      '194개',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              ),
+              Container(
+                color: Colors.grey,
+                height: 1,
+                width: width * 0.8,
+              ),
+              Container(
+                child: CheckboxListTile(
+                  controlAffinity: ListTileControlAffinity.platform,
+                  value: _ischecked,
+                  title: Text(
+                    '카테고리',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
+                  subtitle: Text(
+                    '194개',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                  selected: _ischecked,
+                  activeColor: Color.fromARGB(255, 255, 169, 169),
+                  onChanged: (bool value) {
+                    setState(() {
+                      _ischecked = value;
+                    });
+                  },
                 ),
-                // Container(
-                //   child: ListView.builder(
-                //     itemBuilder: (context, index) {
-                //       return ListTile(leading: folders[index]);
-                //     },
-                //     itemCount: folders.length,
-                //   ),
-                // ),
-              ],
-            ),
+              ),
+              Container(
+                color: Colors.grey,
+                height: 1,
+                width: width * 0.8,
+              ),
+              Container(
+                child: CheckboxListTile(
+                  controlAffinity: ListTileControlAffinity.platform,
+                  value: _ischecked,
+                  title: Text(
+                    '카테고리',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '194개',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                  selected: _ischecked,
+                  activeColor: Color.fromARGB(255, 255, 169, 169),
+                  onChanged: (bool value) {
+                    setState(() {
+                      _ischecked = value;
+                    });
+                  },
+                ),
+              ),
+              Container(
+                color: Colors.grey,
+                height: 1,
+                width: width * 0.8,
+              ),
+            ],
+          ),
+          Expanded(child: Container()),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                child: FlatButton(
+                  onPressed: () {},
+                ),
+              ),
+              Container(
+                child: FlatButton(
+                  onPressed: () {},
+                ),
+              ),
+            ],
           ),
           Container(
             child: ListTile(
@@ -132,7 +188,7 @@ class _StorageScreenState extends State<StorageScreen> {
                             key: _formKey,
                             child: SizedBox(
                               width: 100,
-                              height: 100,
+                              height: 300,
                               child: TextFormField(
                                 validator: (value) {
                                   if (value.isEmpty) {
@@ -142,7 +198,9 @@ class _StorageScreenState extends State<StorageScreen> {
                                   }
                                 },
                                 decoration: InputDecoration(
-                                    border: InputBorder.none, hintText: '폴더 추가', labelText: '폴더 추가'),
+                                    border: InputBorder.none,
+                                    hintText: '폴더 추가',
+                                    labelText: '폴더 추가'),
                               ),
                             ),
                           ),
@@ -158,8 +216,9 @@ class _StorageScreenState extends State<StorageScreen> {
                             ),
                             CupertinoDialogAction(
                               onPressed: () {
-                                if(_formKey.currentState.validate()) {
-                                  Scaffold.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
+                                if (_formKey.currentState.validate()) {
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text('Processing Data')));
                                 }
                               },
                               child: Text(
@@ -178,8 +237,13 @@ class _StorageScreenState extends State<StorageScreen> {
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
             ),
           ),
+          Container(
+            height: height * 0.005,
+            width: width * 0.85,
+          ),
         ],
       ),
     );
   }
 }
+// ignore: non_constant_identifier_names, missing_return
