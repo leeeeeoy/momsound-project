@@ -45,6 +45,7 @@ dependencies:
   flutter_sound: ^7.7.0+1
   path_provider: ^1.6.27
   permission_handler: ^5.1.0+2
+  flutter_calendar_carousel: ^1.5.3
 
 
 

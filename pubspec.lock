@@ -146,6 +146,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_calendar_carousel:
+    dependency: "direct main"
+    description:
+      name: flutter_calendar_carousel
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.3"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -202,7 +209,7 @@ packages:
       name: get
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.25.4"
+    version: "3.26.0"
   google_sign_in:
     dependency: "direct main"
     description:
@@ -244,7 +251,7 @@ packages:
       name: js
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.2"
+    version: "0.6.3-nullsafety.1"
   json_annotation:
     dependency: "direct main"
     description:
@@ -459,7 +466,7 @@ packages:
       name: stack_trace
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.10.0-nullsafety.1"
+    version: "1.10.0-nullsafety.2"
   stream_channel:
     dependency: transitive
     description:
@@ -533,3 +540,4 @@ packages:
 sdks:
   dart: ">=2.10.0 <2.11.0"
   flutter: ">=1.16.0 <2.0.0"
+

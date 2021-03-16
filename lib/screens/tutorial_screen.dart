@@ -31,7 +31,8 @@ class _TutorialScreenState extends State<TutorialScreen> {
                     child: Text(
                       '튜토리얼1',
                       style: TextStyle(
-                        fontSize: 32.0,
+                        fontSize:
+                        32.0,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFFFFA9A9),
                         fontFamily: 'NotoSansKR',
