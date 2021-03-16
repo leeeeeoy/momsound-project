@@ -15,31 +15,19 @@ class _HomeScreenState extends State<HomeScreen> {
     double width = MediaQuery.of(context).size.width;
 
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.all(10),
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              child: Row(
-                children: [
-                  Text(
-                    '주차',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  ButtonTheme(
-                    minWidth: 5,
-                    height: 20,
-                    child: RaisedButton(
-                      onPressed: showPicker,
-                      color: Colors.white30,
-                    ),
-                  ),
-                ],
+              child: Text(
+                '맘소리',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Container(
@@ -51,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Center(
                   child: Text(
-                    '출산예정일, 디데이',
+                    '복숭아',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -61,26 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               child: Center(
                 child: Text(
-                  '엄마이름',
+                  '2022.01.01 예정',
                   style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Color(0xFFF8BBD0),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(5),
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  '태명',
-                  style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -104,36 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.only(top: 0.6 * height),
                     child: Center(
                       child: Container(
-                        width: 80,
-                        height: 80,
-                        child: ButtonTheme(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                              22.0,
-                            ),
-                          ),
-                          child: RaisedButton(
-                            onPressed: () {
-                              // Get.defaultDialog(
-                              //   title: '녹음 횟수 초과!',
-                              //   middleText: '하루 녹음 횟수를 초과했습니다 :)',
-                              //   confirm: FlatButton(
-                              //     onPressed: () {
-                              //       Get.back();
-                              //     },
-                              //     child: Text('확인'),
-                              //   ),
-                              // );
-                              Get.to(RecoderScreen());
-                            },
-                            color: Color(0xFFFFA9A9),
-                            child: Center(
-                              child: Icon(
-                                Icons.mic_sharp,
-                                color: Colors.white,
-                                size: 40,
-                              ),
-                            ),
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(RecoderScreen());
+                          },
+                          child: Image(
+                            image: AssetImage('assets/icons/record_ic.png'),
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),
@@ -145,37 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  int selectedValue;
-  showPicker() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          height: 150,
-          child: CupertinoPicker(
-            backgroundColor: Colors.white,
-            onSelectedItemChanged: (value) {
-              setState(() {
-                selectedValue = value;
-                print('$selectedValue');
-              });
-            },
-            itemExtent: 35.0,
-            children: const [
-              Text('주차선택'),
-              Text('주차선택'),
-              Text('주차선택'),
-              Text('주차선택'),
-              Text('주차선택'),
-              Text('주차선택'),
-              Text('주차선택'),
-            ],
-          ),
-        );
-      },
     );
   }
 }

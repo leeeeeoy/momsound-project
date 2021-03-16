@@ -42,6 +42,10 @@ dependencies:
   firebase_auth: ^0.20.1
   google_sign_in: ^4.5.9
   fluttertoast: ^7.1.8
+  flutter_sound: ^7.7.0+1
+  path_provider: ^1.6.27
+  permission_handler: ^5.1.0+2
+
 
 
 dev_dependencies:
@@ -65,6 +69,7 @@ flutter:
     - assets/images/kakao_logo.png
     - assets/images/naver_logo.jpg
     - assets/icons/record_start_icon.png
+    - assets/icons/record_ic.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
