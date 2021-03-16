@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: Text(
-        'SplashScreen\n2초 후에 넘어갑니다',
+        'Momsori\nSplashScreen\n2초 후에 넘어갑니다',
         style: TextStyle(
           fontSize: 32.0,
           fontFamily: 'NotoSansKR',
