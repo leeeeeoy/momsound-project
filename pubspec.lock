@@ -466,7 +466,7 @@ packages:
       name: stack_trace
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.10.0-nullsafety.2"
+    version: "1.10.0-nullsafety.1"
   stream_channel:
     dependency: transitive
     description:
@@ -540,4 +540,3 @@ packages:
 sdks:
   dart: ">=2.10.0 <2.11.0"
   flutter: ">=1.16.0 <2.0.0"
-
