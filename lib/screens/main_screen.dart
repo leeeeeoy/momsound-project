@@ -4,12 +4,15 @@ import 'package:momsori/screens/home_screen.dart';
 import 'package:momsori/screens/menu_screen.dart';
 import 'package:momsori/screens/storage_screen.dart';
 
+
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
+
 }
 
 class _MainScreenState extends State<MainScreen> {
+
   int _selectedIndex = 0;
 
   @override
