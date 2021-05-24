@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:momsori/models/user.dart';
 import 'package:momsori/screens/diary_screen.dart';
 import 'package:momsori/screens/home_screen.dart';
 import 'package:momsori/screens/menu_screen.dart';
 import 'package:momsori/screens/storage_screen.dart';
 
+User user;
 
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
-
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   int _selectedIndex = 0;
+  var jsonData;
+
+  @override
+  void initState() {
+    jsonData = Get.arguments;
+    user = User.fromJson(jsonData);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

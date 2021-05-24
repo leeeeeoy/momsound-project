@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_dialog/flutter_custom_dialog.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
-import 'package:momsori/screens/main_screen.dart';
+import 'package:momsori/screens/save_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -29,6 +30,7 @@ class _RecordButtonState extends State<RecordButton> {
   bool _mplaybackReady = false;
   String _mPath = 'test.m4a';
   String _fileName;
+  Duration recordTime = Duration.zero;
 
   @override
   void initState() {
@@ -61,6 +63,9 @@ class _RecordButtonState extends State<RecordButton> {
     if (recordState != PermissionStatus.granted) {
       throw RecordingPermissionException('Microphone permission not granted');
     }
+    if (storageState != PermissionStatus.granted) {
+      print('저장 권한 에러');
+    }
 
     await _mRecorder.openAudioSession();
     _mRecorderIsInited = true;
@@ -74,6 +79,11 @@ class _RecordButtonState extends State<RecordButton> {
         .then((value) {
       setState(() {
         _myState = RecodeState.record;
+      });
+    });
+    _mRecorder.onProgress.listen((e) {
+      setState(() {
+        recordTime = e.duration;
       });
     });
   }
@@ -142,92 +152,115 @@ class _RecordButtonState extends State<RecordButton> {
 
   @override
   Widget build(BuildContext context) {
+    YYDialog.init(context);
+
     if (_myState == RecodeState.prepare) {
-      return InkWell(
-        onTap: record,
-        child: Image(
-          image: AssetImage('assets/icons/record_start_icon.png'),
-        ),
-      );
-    } else if (_myState == RecodeState.record) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      return Column(
         children: [
           InkWell(
-            child: Icon(
-              Icons.play_arrow_sharp,
-              color: Color(0xFFDADADA),
-              size: 50,
-            ),
-          ),
-          InkWell(
-            child: Icon(
-              Icons.pause_circle_outline_outlined,
-              color: Color(0xFF989898),
-              size: 70,
-            ),
-            onTap: stopRecorder,
-          ),
-          _saveButton(),
-        ],
-      );
-    } else if (_myState == RecodeState.pause) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          InkWell(
-            child: Icon(
-              Icons.play_arrow_sharp,
-              color: Color(0xFF989898),
-              size: 50,
-            ),
-            onTap: !_mPlayer.isPaused ? play : resumePlayer,
-          ),
-          InkWell(
+            onTap: record,
             child: Image(
               image: AssetImage('assets/icons/record_start_icon.png'),
             ),
-            onTap: record,
           ),
-          _saveButton(),
+        ],
+      );
+    } else if (_myState == RecodeState.record) {
+      return Column(
+        children: [
+          Text('${recordTime.inMilliseconds}'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InkWell(
+                child: Icon(
+                  Icons.play_arrow_sharp,
+                  color: Color(0xFFDADADA),
+                  size: 50,
+                ),
+              ),
+              InkWell(
+                child: Icon(
+                  Icons.pause_circle_outline_outlined,
+                  color: Color(0xFF989898),
+                  size: 70,
+                ),
+                onTap: stopRecorder,
+              ),
+              _saveButton(),
+            ],
+          ),
+        ],
+      );
+    } else if (_myState == RecodeState.pause) {
+      return Column(
+        children: [
+          Text('${recordTime.inMilliseconds}'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InkWell(
+                child: Icon(
+                  Icons.play_arrow_sharp,
+                  color: Color(0xFF989898),
+                  size: 50,
+                ),
+                onTap: !_mPlayer.isPaused ? play : resumePlayer,
+              ),
+              InkWell(
+                child: Image(
+                  image: AssetImage('assets/icons/record_start_icon.png'),
+                ),
+                onTap: record,
+              ),
+              _saveButton(),
+            ],
+          ),
         ],
       );
     } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      return Column(
         children: [
-          InkWell(
-            child: !_mPlayer.isStopped
-                ? Icon(
-                    Icons.pause,
-                    color: Color(0xFF989898),
-                    size: 50,
-                  )
-                : Icon(
-                    Icons.play_arrow_sharp,
-                    color: Color(0xFF989898),
-                    size: 50,
-                  ),
-            onTap: !_mPlayer.isStopped ? pausePlayer : play,
+          Text('${recordTime.inMilliseconds}'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InkWell(
+                child: !_mPlayer.isStopped
+                    ? Icon(
+                        Icons.pause,
+                        color: Color(0xFF989898),
+                        size: 50,
+                      )
+                    : Icon(
+                        Icons.play_arrow_sharp,
+                        color: Color(0xFF989898),
+                        size: 50,
+                      ),
+                onTap: !_mPlayer.isStopped ? pausePlayer : play,
+              ),
+              InkWell(
+                child: !_mPlayer.isStopped
+                    ? ClipOval(
+                        child: Image(
+                          image:
+                              AssetImage('assets/icons/record_start_icon.png'),
+                          color: Color(0xFF989898).withOpacity(0.9),
+                          colorBlendMode: BlendMode.color,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : ClipOval(
+                        child: Image(
+                          image:
+                              AssetImage('assets/icons/record_start_icon.png'),
+                        ),
+                      ),
+                onTap: !_mPlayer.isStopped ? null : record,
+              ),
+              _saveButton(),
+            ],
           ),
-          InkWell(
-            child: !_mPlayer.isStopped
-                ? ClipOval(
-                    child: Image(
-                      image: AssetImage('assets/icons/record_start_icon.png'),
-                      color: Color(0xFF989898).withOpacity(0.9),
-                      colorBlendMode: BlendMode.color,
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                : ClipOval(
-                    child: Image(
-                      image: AssetImage('assets/icons/record_start_icon.png'),
-                    ),
-                  ),
-            onTap: !_mPlayer.isStopped ? null : record,
-          ),
-          _saveButton(),
         ],
       );
     }
@@ -244,125 +277,10 @@ class _RecordButtonState extends State<RecordButton> {
         if (!_mRecorder.isStopped) {
           stopRecorder();
         }
-        Get.defaultDialog(
-          title: '녹음 파일을 저장하시겠어요?',
-          titleStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
-          middleText: '',
-          content: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                child: Text(
-                  '취소',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-                onTap: () {
-                  Get.back();
-                },
-              ),
-              Text(
-                '저장안함',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
-              ),
-              InkWell(
-                child: Text(
-                  '저장',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-                onTap: _saveAlert,
-              ),
-            ],
-          ),
+        Get.dialog(
+          SaveScreen(),
         );
       },
-    );
-  }
-
-  _saveAlert() {
-    Get.back();
-    Get.defaultDialog(
-      title: '녹음 파일 저장',
-      middleText: '',
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextFormField(
-            onChanged: (value) {
-              setState(() {
-                _fileName = value;
-              });
-              print(_fileName);
-            },
-          ),
-          Text(
-            '카테고리',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-            ),
-          ),
-          Text(
-            '전체',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                '취소',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
-              ),
-              InkWell(
-                child: Text(
-                  '저장',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-                onTap: () {
-                  Get.back();
-                  saveFile();
-                  Get.defaultDialog(
-                    title: '보관함에서 다시 들어볼 수 있어요!',
-                    middleText: '',
-                    content: InkWell(
-                      child: Text(
-                        '확인',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
-                      ),
-                      onTap: () {
-                        Get.offAll(() => MainScreen());
-                      },
-                    ),
-                  );
-                },
-              ),
-            ],
-          )
-        ],
-      ),
     );
   }
 }

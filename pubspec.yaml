@@ -46,6 +46,11 @@ dependencies:
   path_provider: ^1.6.27
   permission_handler: ^5.1.0+2
   table_calendar: ^2.3.3
+  http: ^0.12.2
+  flutter_svg: ^0.19.0
+  flutter_spinkit: ^4.1.2
+  flutter_custom_dialog: ^1.0.20
+  draggable_scrollbar: 0.0.4
 
 
 dev_dependencies:
@@ -69,7 +74,9 @@ flutter:
     - assets/images/kakao_logo.png
     - assets/images/naver_logo.jpg
     - assets/icons/record_start_icon.png
-    - assets/icons/record_ic.png
+    - assets/icons/record_ic.svg
+    - assets/icons/message.svg
+    - assets/images/size.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

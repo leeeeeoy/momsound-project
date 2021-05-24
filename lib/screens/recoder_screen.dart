@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:momsori/screens/main_screen.dart';
 import 'package:momsori/widgets/contants.dart';
 import 'package:momsori/widgets/recode_button.dart';
 
@@ -29,7 +28,7 @@ class _RecoderScreenState extends State<RecoderScreen> {
                       alignment: Alignment.topLeft,
                       child: InkWell(
                         onTap: () {
-                          Get.off(() => MainScreen());
+                          Get.back();
                         },
                         child: Icon(
                           Icons.arrow_back_ios,
