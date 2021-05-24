@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:momsori/screens/birth_screen.dart';
+import 'package:momsori/screens/loading_screen.dart';
 import 'package:momsori/screens/tutorial_screen.dart';
 import 'package:momsori/widgets/contants.dart';
 
@@ -119,7 +119,7 @@ class _NicknameScreenState extends State<NicknameScreen> {
                         : Color(0xFFFFA9A9),
                     onPressed: () {
                       Get.to(
-                        BirthScreen(),
+                        () => LoadingScreen(),
                         transition: Transition.fadeIn,
                       );
                     },
