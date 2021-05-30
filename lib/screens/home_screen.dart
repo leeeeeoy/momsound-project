@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   DateTime date = DateTime.parse(user.babyBirth);
 
-  _babyMonth() {
+  _babyDay() {
     var k = DateTime(
       date.year,
       date.month,
@@ -27,67 +27,76 @@ class _HomeScreenState extends State<HomeScreen> {
           DateTime.now().day,
         ))
         .inDays;
-    return (k ~/ 7);
+    return k;
   }
 
   _babyWeek() {
-    var k = DateTime(
-      date.year,
-      date.month,
-      date.day,
-    )
-        .difference(DateTime(
-          DateTime.now().year,
-          DateTime.now().month,
-          DateTime.now().day,
-        ))
-        .inDays;
-    print(k);
+    return (40 - _babyDay() ~/ 7);
+  }
+
+  _babyMonth() {
+    return (_babyWeek() ~/ 4 + 1);
   }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    // double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
 
     return Padding(
       padding: EdgeInsets.all(5),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
-        // crossAxisAlignment: CrossAxisAlignment.stretch,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text('+개월'),
-                Text(
-                  '${DateTime.now().year} / ${DateTime.now().month} / ${DateTime.now().day}',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
+            height: 0.05 * height,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 15,
+                right: 15,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${_babyMonth()}개월',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.to(TaedamScreen());
-                  },
-                  child: SvgPicture.asset(
-                    'assets/icons/message.svg',
-                    width: 40,
-                    height: 40,
+                  Text(
+                    '${DateTime.now().year} / ${DateTime.now().month} / ${DateTime.now().day}',
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                  InkWell(
+                    onTap: () {
+                      Get.to(TaedamScreen());
+                    },
+                    child: SvgPicture.asset(
+                      'assets/icons/message.svg',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
+          SizedBox(
+            height: 0.01 * height,
+          ),
           Container(
+            height: 0.05 * height,
             child: Center(
               child: Text(
                 '${user.babyNickname}',
                 style: TextStyle(
-                  fontSize: 48,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -97,11 +106,14 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '${_babyMonth()} 주차',
+                '${_babyWeek()} 주차',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+              SizedBox(
+                width: 0.05 * width,
               ),
               Text(
                 '${user.babyBirth} 예정',
@@ -112,46 +124,91 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
+          SizedBox(
+            height: 0.05 * height,
+          ),
           Container(
             padding: EdgeInsets.all(5),
-            height: 500,
+            height: 0.6 * height,
             child: Stack(
               children: [
-                InkWell(
-                  onTap: () {},
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                        'https://images.unsplash.com/photo-1496174742515-d2146dcf8e80?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjF8fGN1dGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
-                  ),
+                Column(
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: SvgPicture.asset(
+                            'assets/images/baby_tell_ic.svg',
+                            height: 0.1 * height,
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: 20,
+                            ),
+                            child: Text(
+                              '엄마 사랑해요!',
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFFFFA9A9),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: SvgPicture.asset(
+                        'assets/images/check.svg',
+                        height: 0.4 * height,
+                      ),
+                    ),
+                  ],
                 ),
                 Positioned(
-                  child: Text(
-                    'D-day',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                  child: Container(
+                    width: 90,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      color: Color(0xFFF2F2F2),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'D - ${_babyDay()}',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFFFA9A9),
+                        ),
+                      ),
                     ),
                   ),
-                  right: 50,
-                  bottom: 50,
+                  right: 0.1 * width,
+                  bottom: 0.1 * height,
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 0.05 * height),
+          Container(
+            height: 0.1 * height,
             child: Center(
-              child: Container(
-                child: InkWell(
-                  onTap: () {
-                    Get.to(RecoderScreen());
-                  },
-                  child: SvgPicture.asset(
-                    'assets/icons/record_ic.svg',
-                    width: 80,
-                    height: 80,
-                  ),
+              child: InkWell(
+                onTap: () {
+                  Get.to(RecoderScreen());
+                },
+                child: SvgPicture.asset(
+                  'assets/icons/record_ic.svg',
+                  width: 0.2 * height,
+                  height: 0.2 * width,
                 ),
               ),
             ),
