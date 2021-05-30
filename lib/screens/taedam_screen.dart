@@ -21,34 +21,56 @@ class _TaedamScreenState extends State<TaedamScreen> {
           padding: EdgeInsets.all(10),
           child: Column(
             children: [
-              Container(
-                alignment: Alignment.topLeft,
-                child: InkWell(
-                  onTap: () {
-                    Get.off(() => LoadingScreen());
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                  ),
-                ),
+              SizedBox(
+                height: 20,
               ),
-              Center(
-                child: Text(
-                  '태담가이드',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
+              Row(
+                children: [
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Get.off(() => LoadingScreen());
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                      ),
+                    ),
                   ),
-                ),
+                  Text(
+                    '태담가이드',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
-                height: 50,
+                height: 80,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(9, (index) => Text("${index + 1}개월")),
+                  children: List.generate(10, (index) {
+                    if (_month == index) {
+                      return Text(
+                        "${index + 1}개월",
+                        style: TextStyle(
+                          color: Color(0xFFFFA9A9),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      );
+                    } else
+                      return Text(
+                        "${index + 1}",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                  }),
                 ),
               ),
               SliderTheme(
@@ -62,7 +84,7 @@ class _TaedamScreenState extends State<TaedamScreen> {
                 ),
                 child: Slider(
                   value: _month.toDouble(),
-                  min: 1,
+                  min: 0,
                   max: 9,
                   onChanged: (double newValue) {
                     setState(() {
@@ -79,7 +101,7 @@ class _TaedamScreenState extends State<TaedamScreen> {
                   child: ListView.builder(
                     controller: _scrollController,
                     itemCount: taedamStories[_month].length,
-                    itemExtent: 100.0,
+                    itemExtent: 200.0,
                     itemBuilder: (context, index) {
                       return Container(
                         padding: EdgeInsets.all(5.0),

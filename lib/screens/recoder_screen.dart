@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:momsori/widgets/contants.dart';
 import 'package:momsori/widgets/recode_button.dart';
@@ -38,22 +39,9 @@ class _RecoderScreenState extends State<RecoderScreen> {
                     Text('녹음', style: kTitleStyle),
                   ],
                 ),
-                Container(
-                  height: height * 0.65,
-                  color: Colors.grey,
-                ),
-                SizedBox(
-                  height: height * 0.05,
-                ),
-                Text(
-                  '아이에게 목소리를 들려주세요',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: height * 0.05,
+                SvgPicture.asset(
+                  'assets/images/check.svg',
+                  height: 0.65 * height,
                 ),
                 RecordButton(),
               ],
