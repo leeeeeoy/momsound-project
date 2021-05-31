@@ -19,18 +19,17 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    jsonData = Get.arguments;
-    user = User.fromJson(jsonData);
+    // todo 서버 실행 시 켤 것
+    // jsonData = Get.arguments;
+    // user = User.fromJson(jsonData);
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
@@ -62,6 +61,9 @@ class _MainScreenState extends State<MainScreen> {
               icon: Icon(Icons.settings),
             ),
           ],
+        ),
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
         ),
       ),
     );

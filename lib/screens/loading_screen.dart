@@ -13,7 +13,8 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   // 서버 실행시키면 IP 주소 나옵니다
-  final String url = 'http://192.168.0.33:8080/user/1';
+  // final String url = 'http://192.168.0.33:8080/user/1'; // 요엘님 ip 주소
+  final String url = 'http://114.207.171.118:8080/user/1'; // 영록의 ip 주소
   var jsonData;
 
   @override

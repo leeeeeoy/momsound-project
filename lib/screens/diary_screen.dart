@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 // final kNow = DateTime.now();
 // final kFirstDay = DateTime(kNow.year, kNow.month - 3, kNow.day);
@@ -13,10 +13,14 @@ class DiaryScreen extends StatefulWidget {
 }
 
 class _DiaryScreenState extends State<DiaryScreen> {
-  // CalendarFormat _calendarFormat = CalendarFormat.month;
-  // DateTime _focusedDay = DateTime.now();
-  // DateTime? _selectedDay;
+  CalendarController _calendarController = CalendarController();
 
+  initState(){
+    _calendarController.selectedDate = DateTime(2022, 02, 05);
+    _calendarController.displayDate = DateTime(2022, 02, 05);
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,14 +68,16 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
-                      // Container(
-                      //   child: TableCalendar(
-                      //   ),
-                      // ),
+                      Center(
+                        child: SfCalendar(
+                          view: CalendarView.month,
+                          controller: _calendarController,
+                        ),
+                      ),
                     ],
                   ),
                 )

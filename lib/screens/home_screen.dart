@@ -13,7 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  DateTime date = DateTime.parse(user.babyBirth);
+  // DateTime date = DateTime.parse(user.babyBirth); todo 서버 실행시 주석 해제
+  DateTime date = DateTime.now();
 
   _babyDay() {
     var k = DateTime(
