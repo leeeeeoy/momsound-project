@@ -42,12 +42,15 @@ dependencies:
   flutter_sound: ^7.7.0+1
   path_provider: ^1.6.27
   permission_handler: ^5.1.0+2
-  syncfusion_flutter_calendar: 18.4.49
+#  syncfusion_flutter_calendar: 18.4.49
+  table_calendar: 2.3.3
   http: ^0.12.2
   flutter_svg: ^0.19.0
   flutter_spinkit: ^4.1.2
   flutter_custom_dialog: ^1.0.20
   draggable_scrollbar: 0.0.4
+  modal_bottom_sheet: 1.0.0+1
+
 
 
 dev_dependencies:
