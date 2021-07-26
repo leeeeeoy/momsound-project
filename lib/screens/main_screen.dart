@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:momsori/models/user.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:momsori/models/user_test.dart';
 import 'package:momsori/screens/diary_screen.dart';
 import 'package:momsori/screens/home_screen.dart';
-import 'package:momsori/screens/menu_screen.dart';
 import 'package:momsori/screens/storage_screen.dart';
 
-User user;
+import 'taedam_screen.dart';
+
+UserTest user;
 
 class MainScreen extends StatefulWidget {
   @override
@@ -19,48 +20,104 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    // todo 서버 실행 시 켤 것
     // jsonData = Get.arguments;
-    // user = User.fromJson(jsonData);
+    // user = UserTest.fromJson(jsonData);
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          selectedItemColor: Color(0xFFFFA9A9),
-          unselectedItemColor: Colors.grey,
-          selectedFontSize: 16,
-          unselectedFontSize: 14,
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              label: 'Home',
-              icon: Icon(Icons.home),
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            height: 70,
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  width: 2,
+                  color: Color(0xFFCCCCCC),
+                ),
+              ),
             ),
-            BottomNavigationBarItem(
-              label: 'Diary',
-              icon: Icon(Icons.calendar_today),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 0;
+                    });
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    child: _selectedIndex == 0
+                        ? SvgPicture.asset(
+                            'assets/icons/홈선택.svg',
+                          )
+                        : SvgPicture.asset(
+                            'assets/icons/홈선택x.svg',
+                          ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 1;
+                    });
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 35,
+                    child: _selectedIndex == 1
+                        ? SvgPicture.asset(
+                            'assets/icons/달력선택.svg',
+                          )
+                        : SvgPicture.asset(
+                            'assets/icons/달력선택x.svg',
+                          ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 2;
+                    });
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 35,
+                    child: _selectedIndex == 2
+                        ? SvgPicture.asset(
+                            'assets/icons/저장선택.svg',
+                          )
+                        : SvgPicture.asset(
+                            'assets/icons/저장선택x.svg',
+                          ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      _selectedIndex = 3;
+                    });
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    child: _selectedIndex == 3
+                        ? SvgPicture.asset(
+                            'assets/icons/태담선택.svg',
+                          )
+                        : SvgPicture.asset(
+                            'assets/icons/태담선택x.svg',
+                          ),
+                  ),
+                ),
+              ],
             ),
-            BottomNavigationBarItem(
-              label: 'Storage',
-              icon: Icon(Icons.storage),
-            ),
-            BottomNavigationBarItem(
-              label: 'Menu',
-              icon: Icon(Icons.settings),
-            ),
-          ],
+          ),
         ),
         body: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
@@ -73,6 +130,6 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     DiaryScreen(),
     StorageScreen(),
-    MenuScreen(),
+    TaedamScreen(),
   ];
 }

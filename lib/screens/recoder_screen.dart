@@ -31,8 +31,12 @@ class _RecoderScreenState extends State<RecoderScreen> {
                         onTap: () {
                           Get.back();
                         },
-                        child: Icon(
-                          Icons.arrow_back_ios,
+                        child: Container(
+                          height: 50,
+                          width: 40,
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                          ),
                         ),
                       ),
                     ),

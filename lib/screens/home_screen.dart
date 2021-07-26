@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:momsori/screens/recoder_screen.dart';
-import 'package:momsori/screens/taedam_screen.dart';
+import 'package:momsori/widgets/BubblePainter2.dart';
+import 'package:momsori/widgets/topics.dart';
 
-import 'main_screen.dart';
+import 'menu_screen.dart';
+//F4F3FBFF
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,31 +15,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // DateTime date = DateTime.parse(user.babyBirth); todo 서버 실행시 주석 해제
-  DateTime date = DateTime.now();
+  // DateTime date = DateTime.parse(user.babyBirth);
 
-  _babyDay() {
-    var k = DateTime(
-      date.year,
-      date.month,
-      date.day,
-    )
-        .difference(DateTime(
-          DateTime.now().year,
-          DateTime.now().month,
-          DateTime.now().day,
-        ))
-        .inDays;
-    return k;
-  }
+  // _babyDay() {
+  //   var k = DateTime(
+  //     date.year,
+  //     date.month,
+  //     date.day,
+  //   )
+  //       .difference(DateTime(
+  //         DateTime.now().year,
+  //         DateTime.now().month,
+  //         DateTime.now().day,
+  //       ))
+  //       .inDays;
+  //   return k;
+  // }
+  //
+  // _babyWeek() {
+  //   return (40 - _babyDay() ~/ 7);
+  // }
+  //
+  // _babyMonth() {
+  //   return (_babyWeek() ~/ 4 + 1);
+  // }
 
-  _babyWeek() {
-    return (40 - _babyDay() ~/ 7);
-  }
-
-  _babyMonth() {
-    return (_babyWeek() ~/ 4 + 1);
-  }
+  var _index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
       padding: EdgeInsets.all(5),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(
+            height: 0.03 * height,
+          ),
           Container(
             height: 0.05 * height,
             child: Padding(
@@ -61,27 +66,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${_babyMonth()}개월',
+                    '14주차',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                       fontSize: 24,
-                    ),
-                  ),
-                  Text(
-                    '${DateTime.now().year} / ${DateTime.now().month} / ${DateTime.now().day}',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(TaedamScreen());
+                      Get.to(MenuScreen());
                     },
                     child: SvgPicture.asset(
-                      'assets/icons/message.svg',
-                      width: 50,
-                      height: 50,
+                      'assets/icons/세팅선택x.svg',
+                      width: 36,
+                      height: 36,
                     ),
                   ),
                 ],
@@ -89,38 +87,53 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(
-            height: 0.01 * height,
+            height: 0.04 * height,
           ),
           Container(
             height: 0.05 * height,
             child: Center(
               child: Text(
-                '${user.babyNickname}',
+                // '${user.babyNickname}',
+                '동동이',
                 style: TextStyle(
                   fontSize: 40,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
+          ),
+          SizedBox(
+            height: 7,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '${_babyWeek()} 주차',
+                // '${user.babyBirth} 예정',
+                '2021.12.31 예정',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               SizedBox(
-                width: 0.05 * width,
+                width: 0.025 * width,
               ),
               Text(
-                '${user.babyBirth} 예정',
+                '|',
                 style: TextStyle(
                   fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              SizedBox(
+                width: 0.025 * width,
+              ),
+              Text(
+                'D-190',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ],
@@ -130,87 +143,68 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Container(
             padding: EdgeInsets.all(5),
-            height: 0.6 * height,
+            height: 0.47 * height,
             child: Stack(
               children: [
                 Column(
-                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Stack(
+                      alignment: Alignment.center,
                       children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: SvgPicture.asset(
-                            'assets/images/baby_tell_ic.svg',
-                            height: 0.1 * height,
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              top: 20,
-                            ),
-                            child: Text(
-                              '엄마 사랑해요!',
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFFFFA9A9),
+                        Container(
+                          height: height * 0.13,
+                          width: width * 0.8,
+                          child: CustomPaint(
+                            painter: BubblePainter2(),
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                bottom: 21,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  topic[0],
+                                  style: TextStyle(
+                                    // color: Colors.white,
+                                    // color: Color(0xFFFFA9A9),
+                                    color: Color(0xFF7C7C7C),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    InkWell(
-                      onTap: () {},
-                      child: SvgPicture.asset(
-                        'assets/images/check.svg',
-                        height: 0.4 * height,
+                    Container(
+                      padding: EdgeInsets.only(
+                        right: 10,
+                      ),
+                      child: Image.asset(
+                        "assets/images/gif_check.gif",
+                        height: 0.32 * height,
+                        width: 0.7 * width,
                       ),
                     ),
                   ],
-                ),
-                Positioned(
-                  child: Container(
-                    width: 90,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                      color: Color(0xFFF2F2F2),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'D - ${_babyDay()}',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFFFFA9A9),
-                        ),
-                      ),
-                    ),
-                  ),
-                  right: 0.1 * width,
-                  bottom: 0.1 * height,
                 ),
               ],
             ),
           ),
           Container(
             height: 0.1 * height,
-            child: Center(
-              child: InkWell(
-                onTap: () {
-                  Get.to(RecoderScreen());
-                },
-                child: SvgPicture.asset(
-                  'assets/icons/record_ic.svg',
-                  width: 0.2 * height,
-                  height: 0.2 * width,
-                ),
+            child: InkWell(
+              onTap: () {
+                Get.to(
+                  RecoderScreen(),
+                  transition: Transition.downToUp,
+                );
+              },
+              child: SvgPicture.asset(
+                'assets/icons/record_ic.svg',
+                width: 0.2 * height,
+                height: 0.2 * width,
               ),
             ),
           ),

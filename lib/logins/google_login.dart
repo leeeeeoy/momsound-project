@@ -14,8 +14,8 @@ Widget _signInButton() {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image(
-              image: AssetImage("assets/images/google_logo.png"), height: 35.0),
+          // Image(
+          //     image: AssetImage("assets/images/google_logo.png"), height: 35.0),
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(

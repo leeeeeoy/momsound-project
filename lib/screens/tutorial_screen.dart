@@ -31,8 +31,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                     child: Text(
                       '튜토리얼1',
                       style: TextStyle(
-                        fontSize:
-                        32.0,
+                        fontSize: 32.0,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFFFFA9A9),
                         fontFamily: 'NotoSansKR',
@@ -101,17 +100,21 @@ class _TutorialScreenState extends State<TutorialScreen> {
                 });
               },
             ),
-            _index != 3
-                ? Container(
-                    padding: EdgeInsets.all(15),
-                    alignment: Alignment.topRight,
-                    child: InkWell(
-                      onTap: () {
-                        Get.to(
-                          NicknameScreen(),
-                          transition: Transition.cupertino,
-                        );
-                      },
+            if (_index != 3)
+              Container(
+                padding: EdgeInsets.all(10),
+                alignment: Alignment.topRight,
+                child: InkWell(
+                  onTap: () {
+                    Get.to(
+                      NicknameScreen(),
+                      transition: Transition.cupertino,
+                    );
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 50,
+                    child: Center(
                       child: Text(
                         'Skip',
                         style: TextStyle(
@@ -122,8 +125,11 @@ class _TutorialScreenState extends State<TutorialScreen> {
                         ),
                       ),
                     ),
-                  )
-                : Text(''),
+                  ),
+                ),
+              )
+            else
+              Text(''),
             Padding(
               padding: EdgeInsets.all(10),
               child: Column(

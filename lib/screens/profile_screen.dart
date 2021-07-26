@@ -1,23 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:momsori/screens/tutorial_screen.dart';
 import 'package:momsori/widgets/contants.dart';
 
-import 'main_screen.dart';
-
-class NicknameScreen extends StatefulWidget {
+class ProfileScreen extends StatefulWidget {
   @override
-  _NicknameScreenState createState() => _NicknameScreenState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _NicknameScreenState extends State<NicknameScreen> {
-  int _selected = 1;
-  String _mText = '';
-  String _bText = '';
-  String _dText = '';
-
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -37,25 +29,25 @@ class _NicknameScreenState extends State<NicknameScreen> {
                       alignment: Alignment.topLeft,
                       child: InkWell(
                         onTap: () {
-                          Get.off(TutorialScreen());
+                          Get.back();
                         },
                         child: Icon(
                           Icons.arrow_back_ios,
                         ),
                       ),
                     ),
-                    Text('정보등록', style: kTitleStyle),
+                    Text(
+                      '프로필 수정',
+                      style: kTitleStyle,
+                    ),
                   ],
                 ),
-                SizedBox(
-                  height: height * 0.05,
+                SvgPicture.asset(
+                  'assets/images/check.svg',
+                  height: 0.4 * height,
                 ),
                 TextFormField(
-                  onChanged: (nextText) {
-                    setState(() {
-                      _mText = nextText;
-                    });
-                  },
+                  onChanged: (nextText) {},
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(6),
                   ],
@@ -67,17 +59,15 @@ class _NicknameScreenState extends State<NicknameScreen> {
                     counterText: '',
                     fillColor: Color(0xFFE5E5E5),
                     filled: true,
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 25, horizontal: 10),
                   ),
                 ),
                 SizedBox(
                   height: height * 0.02,
                 ),
                 TextFormField(
-                  onChanged: (nextText) {
-                    setState(() {
-                      _bText = nextText;
-                    });
-                  },
+                  onChanged: (nextText) {},
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(6),
                   ],
@@ -89,17 +79,15 @@ class _NicknameScreenState extends State<NicknameScreen> {
                     counterText: '',
                     fillColor: Color(0xFFE5E5E5),
                     filled: true,
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 25, horizontal: 10),
                   ),
                 ),
                 SizedBox(
                   height: height * 0.02,
                 ),
                 TextFormField(
-                  onChanged: (nextText) {
-                    setState(() {
-                      _dText = nextText;
-                    });
-                  },
+                  onChanged: (nextText) {},
                   cursorColor: Color(0xFFFFA9A9),
                   decoration: InputDecoration(
                     hintText: '태아의 출생 예정일',
@@ -107,30 +95,22 @@ class _NicknameScreenState extends State<NicknameScreen> {
                     counterText: '',
                     fillColor: Color(0xFFE5E5E5),
                     filled: true,
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 25, horizontal: 10),
                   ),
                 ),
                 SizedBox(
-                  height: height * 0.1,
+                  height: height * 0.05,
                 ),
                 Container(
-                  height: height * 0.06,
+                  height: height * 0.08,
                   child: RaisedButton(
-                    color: _mText == '' || _bText == '' || _dText == ''
-                        ? Color(0xFFDADADA)
-                        : Color(0xFFFFA9A9),
-                    onPressed: () {
-                      Get.to(
-                        // () => LoadingScreen(),
-                        () => MainScreen(),
-                        transition: Transition.fadeIn,
-                      );
-                    },
+                    color: Color(0xFFFFA9A9),
+                    onPressed: () {},
                     child: Text(
-                      '다음',
+                      '확인',
                       style: TextStyle(
-                        color: _mText == '' || _bText == '' || _dText == ''
-                            ? Colors.black
-                            : Colors.white,
+                        color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
