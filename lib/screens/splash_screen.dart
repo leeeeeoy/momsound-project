@@ -9,12 +9,13 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: Text(
-        'Momsori\nSplashScreen\n2초 후에 넘어갑니다',
+        'MOMSORY\nSplashScreen\n2초 후에 넘어갑니다',
         style: TextStyle(
           fontSize: 32.0,
-          fontFamily: 'NotoSansKR',
+          fontWeight: FontWeight.w900,
         ),
       ),
+      splashIconSize: 200,
       nextScreen: TutorialScreen(),
       // nextScreen: LoginScreen(),
       duration: 2000,

@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Momsori',
       theme: ThemeData(
         primaryColor: Color(0xFFFFA9A9),
+        fontFamily: 'Noto_Sans_KR',
       ),
       home: SplashScreen(),
       localizationsDelegates: [

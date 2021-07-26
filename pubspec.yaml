@@ -39,9 +39,6 @@ dependencies:
   shared_preferences:
   platform:
   package_info:
-  firebase_auth: ^0.20.1
-  google_sign_in: ^4.5.9
-  fluttertoast: ^7.1.8
   flutter_sound: ^7.7.0+1
   path_provider: ^1.6.27
   permission_handler: ^5.1.0+2
@@ -73,21 +70,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/google_logo.png
-    - assets/images/kakao_logo.png
-    - assets/images/naver_logo.jpg
-    - assets/icons/record_ic.svg
-    - assets/icons/message.svg
-    - assets/images/baby_tell_ic.svg
-    - assets/images/check.svg
-    - assets/icons/pause_ic.svg
-    - assets/icons/play_arrow-24px_3.svg
-    - assets/icons/record_icon.svg
-    - assets/icons/record_icon-1.svg
-    - assets/icons/stop-black-18dp_2.svg
-    - assets/icons/play_arrow-24px (1) 1.svg
-    - assets/icons/play_arrow-24px.svg
-    - assets/icons/pause-black-18dp 2.svg
+    - assets/images/
+    - assets/icons/
 
 
 
@@ -104,9 +88,20 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: NotoSansKR
+    - family: Noto_Sans_KR
       fonts:
-        - asset: assets/fonts/Noto_Sans_KR/NotoSansKR-Bold.ttf
+        - asset: assets/fonts/Noto_Sans_KR/NotoSansKR-Black.otf
+          weight: 900
+        - asset: assets/fonts/Noto_Sans_KR/NotoSansKR-Bold.otf
+          weight: 700
+        - asset: assets/fonts/Noto_Sans_KR/NotoSansKR-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Noto_Sans_KR/NotoSansKR-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Noto_Sans_KR/NotoSansKR-Light.otf
+          weight: 300
+        - asset: assets/fonts/Noto_Sans_KR/NotoSansKR-Thin.otf
+          weight: 100
 
   #   - family: Trajan Pro
   #     fonts:

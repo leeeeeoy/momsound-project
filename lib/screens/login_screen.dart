@@ -18,27 +18,27 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CircleAvatar(
-                    child: Image(
-                      image: AssetImage('assets/images/kakao_logo.png'),
-                    ),
-                  ),
+                  // CircleAvatar(
+                  //   child: Image(
+                  //     image: AssetImage('assets/images/kakao_logo.png'),
+                  //   ),
+                  // ),
                   SizedBox(
                     width: 30,
                   ),
-                  CircleAvatar(
-                    child: Image(
-                      image: AssetImage('assets/images/google_logo.png'),
-                    ),
-                  ),
+                  // CircleAvatar(
+                  //   child: Image(
+                  //     image: AssetImage('assets/images/google_logo.png'),
+                  //   ),
+                  // ),
                   SizedBox(
                     width: 30,
                   ),
-                  CircleAvatar(
-                    child: Image(
-                      image: AssetImage('assets/images/naver_logo.jpg'),
-                    ),
-                  ),
+                  // CircleAvatar(
+                  //   child: Image(
+                  //     image: AssetImage('assets/images/naver_logo.jpg'),
+                  //   ),
+                  // ),
                 ],
               )
             ],
