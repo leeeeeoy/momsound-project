@@ -34,7 +34,6 @@ dependencies:
   intl: ^0.17.0
   page_transition: ^2.0.1-nullsafety.0
   dio: ^4.0.0
-  json_annotation: ^4.0.1
   shared_preferences: ^2.0.6
   platform: ^3.0.0
   package_info: ^2.0.2
@@ -45,6 +44,10 @@ dependencies:
   flutter_svg: ^0.22.0
   flutter_spinkit: ^5.0.0
   draggable_scrollbar: ^0.1.0
+  freezed:
+  json_annotation:
+  json_serializable:
+  build_runner:
 
 dev_dependencies:
   flutter_test:
