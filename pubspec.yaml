@@ -3,7 +3,7 @@ description: 맘소리 프로젝트
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -24,34 +24,27 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_localizations: # Add this line
-    sdk: flutter         # Add this line
+    sdk: flutter # Add this line
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
-  get: ^3.24.0
-  animated_splash_screen: ^1.0.1+2
-  intl: ^0.16.0
-  page_transition: ^1.1.7+6
-  kakao_flutter_sdk: ^0.5.4
-  dio:
-  json_annotation:
-  shared_preferences:
-  platform:
-  package_info:
-  flutter_sound: ^7.7.0+1
-  path_provider: ^1.6.27
-  permission_handler: ^5.1.0+2
-#  syncfusion_flutter_calendar: 18.4.49
-  table_calendar: 2.3.3
-  http: ^0.12.2
-  flutter_svg: ^0.19.0
-  flutter_spinkit: ^4.1.2
-  flutter_custom_dialog: ^1.0.20
-  draggable_scrollbar: 0.0.4
-  modal_bottom_sheet: 1.0.0+1
-
-
+  cupertino_icons: ^1.0.3
+  get: ^4.3.6
+  animated_splash_screen: ^1.1.0
+  intl: ^0.17.0
+  page_transition: ^2.0.1-nullsafety.0
+  dio: ^4.0.0
+  json_annotation: ^4.0.1
+  shared_preferences: ^2.0.6
+  platform: ^3.0.0
+  package_info: ^2.0.2
+  flutter_sound: ^8.3.9
+  path_provider: ^2.0.2
+  permission_handler: ^8.1.4+2
+  http: ^0.13.3
+  flutter_svg: ^0.22.0
+  flutter_spinkit: ^5.0.0
+  draggable_scrollbar: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -62,7 +55,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -72,9 +64,6 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-
-
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
