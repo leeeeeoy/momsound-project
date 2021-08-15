@@ -4,8 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:momsori/screens/profile_screen.dart';
 
-import 'main_screen.dart';
-
 class MenuScreen extends StatefulWidget {
   @override
   _MenuScreenState createState() => _MenuScreenState();
@@ -47,9 +45,9 @@ class _MenuScreenState extends State<MenuScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('${user.name}님의 아기'),
-                        Text('${user.babyNickname}'),
-                        Text('출산예정일: ${user.babyBirth}'),
+                        Text('엄마님의 아기'),
+                        Text('동동이'),
+                        Text('출산예정일: 2021-12-31'),
                       ],
                     ),
                   ),

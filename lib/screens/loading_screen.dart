@@ -16,7 +16,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
   // final String url = 'http://192.168.0.33:8080/user/1'; // 요엘님 ip 주소
   // final String url = 'http://192.168.0.33:8080/test/1'; // test
   final String url = 'http://192.168.219.107:8080/test/1'; // test
-  // final String url = 'http://114.207.171.118:8080/user/1; // 영록의 ip 주소
   var jsonData;
 
   @override
@@ -26,8 +25,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void _getJsonData() async {
-    var res = await http.get(url);
-    jsonData = jsonDecode(res.body);
+    // var res = await http.get(url);
+    // jsonData = jsonDecode(res.body);
 
     Get.to(
       () => MainScreen(),
