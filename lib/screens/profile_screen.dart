@@ -13,7 +13,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
@@ -104,8 +103,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 Container(
                   height: height * 0.08,
-                  child: RaisedButton(
-                    color: Color(0xFFFFA9A9),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      onSurface: Color(0xFFFFA9A9),
+                    ),
                     onPressed: () {},
                     child: Text(
                       '확인',

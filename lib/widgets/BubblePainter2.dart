@@ -40,27 +40,6 @@ class BubblePainter2 extends CustomPainter {
       ..lineTo(fillet, 0)
       ..quadraticBezierTo(0, 0, 0, fillet);
 
-    final tailPath = Path()
-      ..moveTo(tailStartPoint.x, tailStartPoint.y)
-      ..cubicTo(
-        tailStartPoint.x + (tailSize.width * 0.2),
-        tailStartPoint.y,
-        tailStartPoint.x + (tailSize.width * 0.6),
-        tailStartPoint.y + (tailSize.height * 0.2),
-        tailStartPoint.x + tailSize.width / 2, // 목적지 x
-        tailStartPoint.y + tailSize.height, // 목적지 y
-      )
-      ..cubicTo(
-        (tailStartPoint.x + tailSize.width / 2) + (tailSize.width * 0.2),
-        tailStartPoint.y + tailSize.height,
-        tailStartPoint.x + tailSize.width,
-        tailStartPoint.y + (tailSize.height * 0.3),
-        tailStartPoint.x + tailSize.width, // 목적지 x
-        tailStartPoint.y, // 목적지 y
-      );
-
-    // bubblePath.addPath(tailPath, Offset(0, 0));
-
     final paint = Paint()
       // ..color = Color(0xFFFFA9A9)  //  분홍색
       ..color = Color(0xFF7C7C7C) //  회색

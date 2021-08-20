@@ -13,7 +13,6 @@ class NicknameScreen extends StatefulWidget {
 }
 
 class _NicknameScreenState extends State<NicknameScreen> {
-  int _selected = 1;
   String _mText = '';
   String _bText = '';
   String _dText = '';
@@ -21,7 +20,6 @@ class _NicknameScreenState extends State<NicknameScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
@@ -114,10 +112,12 @@ class _NicknameScreenState extends State<NicknameScreen> {
                 ),
                 Container(
                   height: height * 0.06,
-                  child: RaisedButton(
-                    color: _mText == '' || _bText == '' || _dText == ''
-                        ? Color(0xFFDADADA)
-                        : Color(0xFFFFA9A9),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: _mText == '' || _bText == '' || _dText == ''
+                          ? Color(0xFFDADADA)
+                          : Color(0xFFFFA9A9),
+                    ),
                     onPressed: () {
                       Get.to(
                         // () => LoadingScreen(),

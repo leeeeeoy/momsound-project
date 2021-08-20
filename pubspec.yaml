@@ -48,6 +48,7 @@ dependencies:
   json_annotation:
   json_serializable:
   build_runner:
+  keep_keyboard_popup_menu:
 
 dev_dependencies:
   flutter_test:
