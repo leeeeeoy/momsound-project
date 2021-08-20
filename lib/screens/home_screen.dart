@@ -40,8 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
   //   return (_babyWeek() ~/ 4 + 1);
   // }
 
-  var _index = 0;
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;

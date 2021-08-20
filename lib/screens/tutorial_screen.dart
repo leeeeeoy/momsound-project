@@ -142,8 +142,10 @@ class _TutorialScreenState extends State<TutorialScreen> {
                     ),
                     height: height * 0.08,
                     child: _index == 3
-                        ? RaisedButton(
-                            color: Color(0xFFFFA9A9),
+                        ? ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              onSurface: Color(0xFFFFA9A9),
+                            ),
                             onPressed: () {
                               Get.to(
                                 NicknameScreen(),

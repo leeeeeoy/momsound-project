@@ -16,8 +16,6 @@ class _BirthScreenState extends State<BirthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(),
@@ -34,7 +32,7 @@ class _BirthScreenState extends State<BirthScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                FlatButton(
+                ElevatedButton(
                   onPressed: _myDatePicker,
                   child: Text(
                     '$_year 년 $_month 월 $_day 일',
@@ -44,8 +42,8 @@ class _BirthScreenState extends State<BirthScreen> {
                     ),
                   ),
                 ),
-                RaisedButton(
-                  color: Color(0xFFFFA9A9),
+                ElevatedButton(
+                  // color: Color(0xFFFFA9A9),
                   onPressed: () {
                     Get.to(MainScreen());
                   },
