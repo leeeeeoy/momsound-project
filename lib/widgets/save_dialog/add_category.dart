@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:momsori/getx_controller/record_list_controller.dart';
 import 'package:momsori/widgets/save_dialog/save2.dart';
 
 addCategory(BuildContext context1) {
+  final controller = Get.put(RecordListController());
   String newCategory = '';
+
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -119,8 +119,9 @@ class _NicknameScreenState extends State<NicknameScreen> {
                           : Color(0xFFFFA9A9),
                     ),
                     onPressed: () {
+                      FocusScopeNode currentFocus = FocusScope.of(context);
+                      currentFocus.unfocus();
                       Get.to(
-                        // () => LoadingScreen(),
                         () => MainScreen(),
                         transition: Transition.fadeIn,
                       );

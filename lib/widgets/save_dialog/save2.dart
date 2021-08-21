@@ -8,9 +8,8 @@ import 'package:momsori/widgets/save_dialog/add_category.dart';
 import 'package:momsori/widgets/save_dialog/save1.dart';
 import 'package:momsori/widgets/save_dialog/save3.dart';
 
-final controller = Get.put(RecordListController());
-
 save2(BuildContext context1) {
+  final controller = Get.put(RecordListController());
   String fileName = '';
   int indexCheck = 0;
   String category = '전체';
@@ -99,8 +98,6 @@ save2(BuildContext context1) {
                               category = _.category[index];
                             });
                             closePopup();
-                            print('index' + index.toString());
-                            print('indexCheck' + indexCheck.toString());
                           }),
                     ),
                   ),

@@ -144,7 +144,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                     child: _index == 3
                         ? ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              onSurface: Color(0xFFFFA9A9),
+                              primary: Color(0xFFFFA9A9),
                             ),
                             onPressed: () {
                               Get.to(

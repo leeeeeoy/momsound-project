@@ -1,18 +1,23 @@
 import 'dart:io';
 
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:momsori/screens/recoder_screen.dart';
+import 'package:get/get.dart';
+import 'package:momsori/getx_controller/record_state_controller.dart';
+import 'package:momsori/getx_controller/record_time_controller.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class RecordSound {
   Codec _codec = Codec.aacMP4;
-  FlutterSoundPlayer _mPlayer = FlutterSoundPlayer();
-  FlutterSoundRecorder _mRecorder = FlutterSoundRecorder();
+  FlutterSoundPlayer? _mPlayer = FlutterSoundPlayer();
+  FlutterSoundRecorder? _mRecorder = FlutterSoundRecorder();
   bool _mPlayerIsInited = false;
   bool _mRecorderIsInited = false;
   bool _mplaybackReady = false;
   String _mPath = 'momsound.m4a';
+
+  final recordTimeController = Get.put(RecordTimeController());
+  final recordStateController = Get.put(RecordStateController());
 
   RecordSound._();
 
@@ -25,7 +30,7 @@ class RecordSound {
   void initSound() {
     _mPlayer = FlutterSoundPlayer();
     _mRecorder = FlutterSoundRecorder();
-    _mPlayer.openAudioSession().then((value) {
+    _mPlayer!.openAudioSession().then((value) {
       _mPlayerIsInited = true;
     });
 
@@ -35,22 +40,22 @@ class RecordSound {
   }
 
   void disposeSound() {
-    _mPlayer.closeAudioSession();
+    _mPlayer!.closeAudioSession();
     _mPlayer = null;
-    _mRecorder.closeAudioSession();
+    _mRecorder!.closeAudioSession();
     _mRecorder = null;
   }
 
   bool isPlayerPaused() {
-    return _mPlayer.isPaused;
+    return _mPlayer!.isPaused;
   }
 
   bool isRecordPaused() {
-    return _mRecorder.isPaused;
+    return _mRecorder!.isPaused;
   }
 
   bool isPlayerStopped() {
-    return _mRecorder.isStopped;
+    return _mRecorder!.isStopped;
   }
 
   Future<void> openTheRecorder() async {
@@ -63,12 +68,12 @@ class RecordSound {
       print('저장 권한 에러');
     }
 
-    await _mRecorder.openAudioSession();
+    await _mRecorder!.openAudioSession();
     _mRecorderIsInited = true;
   }
 
   void record() async {
-    _mRecorder
+    _mRecorder!
         .startRecorder(
       codec: _codec,
       toFile: _mPath,
@@ -76,14 +81,14 @@ class RecordSound {
         .then((value) {
       recordStateController.changeRecording();
     });
-    _mRecorder.setSubscriptionDuration(Duration(seconds: 1));
-    _mRecorder.onProgress.listen((e) {
+    _mRecorder!.setSubscriptionDuration(Duration(seconds: 1));
+    _mRecorder!.onProgress!.listen((e) {
       recordTimeController.updateRecordTime(recordTimeValue(e.duration));
     });
   }
 
   void stopRecorder() async {
-    await _mRecorder.stopRecorder().then((value) {
+    await _mRecorder!.stopRecorder().then((value) {
       _mplaybackReady = true;
       recordStateController.changePause();
     });
@@ -92,9 +97,9 @@ class RecordSound {
   void play() async {
     assert(_mPlayerIsInited &&
         _mplaybackReady &&
-        _mRecorder.isStopped &&
-        _mPlayer.isStopped);
-    _mPlayer
+        _mRecorder!.isStopped &&
+        _mPlayer!.isStopped);
+    _mPlayer!
         .startPlayer(
             fromURI: _mPath,
             codec: _codec,
@@ -107,19 +112,19 @@ class RecordSound {
   }
 
   void pausePlayer() {
-    _mPlayer.pausePlayer().then((value) {
+    _mPlayer!.pausePlayer().then((value) {
       recordStateController.changePause();
     });
   }
 
   void resumePlayer() {
-    _mPlayer.resumePlayer().then((value) {
+    _mPlayer!.resumePlayer().then((value) {
       recordStateController.changePlaying();
     });
   }
 
   void stopPlayer() {
-    _mPlayer.stopPlayer().then((value) {
+    _mPlayer!.stopPlayer().then((value) {
       recordStateController.changePause();
     });
   }
@@ -128,7 +133,7 @@ class RecordSound {
     String inputFile = '/data/user/0/com.example.momsori/cache/$_mPath';
     var tempDir = await getExternalStorageDirectory();
     var directory = Directory(
-        '${tempDir.parent.parent.parent.parent.path}/momsound/$category/');
+        '${tempDir!.parent.parent.parent.parent.path}/momsound/$category/');
     print(directory);
     directory.create(recursive: true);
     String outputFile = '${directory.path}$fileName.m4a';

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:momsori/getx_controller/record_state_controller.dart';
 import 'package:momsori/screens/main_screen.dart';
-import 'package:momsori/screens/recoder_screen.dart';
 
 save3(BuildContext context) {
+  final recordStateController = Get.put(RecordStateController());
+
   return Column(
     children: [
       SizedBox(

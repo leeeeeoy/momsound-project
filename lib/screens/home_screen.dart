@@ -51,14 +51,14 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: 0.03 * height,
+            height: 0.02 * height,
           ),
           Container(
             height: 0.05 * height,
             child: Padding(
               padding: EdgeInsets.only(
-                left: 15,
-                right: 15,
+                left: 0.05 * width,
+                right: 0.05 * width,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     '14주차',
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 24,
+                      fontSize: 0.06 * width,
                     ),
                   ),
                   InkWell(
@@ -76,8 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: SvgPicture.asset(
                       'assets/icons/세팅선택x.svg',
-                      width: 36,
-                      height: 36,
+                      width: 0.08 * width,
+                      height: 0.08 * width,
                     ),
                   ),
                 ],
@@ -94,47 +94,47 @@ class _HomeScreenState extends State<HomeScreen> {
                 // '${user.babyNickname}',
                 '동동이',
                 style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 0.04 * height,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
           ),
-          SizedBox(
-            height: 7,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                // '${user.babyBirth} 예정',
-                '2021.12.31 예정',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
+          Container(
+            height: 0.03 * height,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  // '${user.babyBirth} 예정',
+                  '2021.12.31 예정',
+                  style: TextStyle(
+                    fontSize: 0.02 * height,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 0.025 * width,
-              ),
-              Text(
-                '|',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
+                SizedBox(
+                  width: 0.025 * width,
                 ),
-              ),
-              SizedBox(
-                width: 0.025 * width,
-              ),
-              Text(
-                'D-190',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
+                Text(
+                  '|',
+                  style: TextStyle(
+                    fontSize: 0.02 * height,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: 0.025 * width,
+                ),
+                Text(
+                  'D-190',
+                  style: TextStyle(
+                    fontSize: 0.02 * height,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 0.05 * height,
