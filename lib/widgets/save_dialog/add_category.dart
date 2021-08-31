@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:momsori/getx_controller/record_list_controller.dart';
-import 'package:momsori/widgets/save_dialog/save2.dart';
+import '../../getx_controller/record_list_controller.dart';
+import 'save2.dart';
 
 addCategory(BuildContext context1) {
   final controller = Get.put(RecordListController());

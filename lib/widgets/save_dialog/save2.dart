@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:keep_keyboard_popup_menu/keep_keyboard_popup_menu.dart';
-import 'package:momsori/getx_controller/record_list_controller.dart';
-import 'package:momsori/screens/recoder_screen.dart';
-import 'package:momsori/widgets/save_dialog/add_category.dart';
-import 'package:momsori/widgets/save_dialog/save1.dart';
-import 'package:momsori/widgets/save_dialog/save3.dart';
+
+import '../../getx_controller/record_list_controller.dart';
+import '../../screens/recoder_screen.dart';
+import 'add_category.dart';
+import 'save1.dart';
+import 'save3.dart';
 
 save2(BuildContext context1) {
   final controller = Get.put(RecordListController());

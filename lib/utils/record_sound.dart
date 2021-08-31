@@ -1,23 +1,26 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
-import 'package:momsori/getx_controller/record_state_controller.dart';
-import 'package:momsori/getx_controller/record_time_controller.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../getx_controller/record_time_controller.dart';
+import '../getx_controller/record_state_controller.dart';
+
+final recordTimeController = Get.put(RecordTimeController());
+
+final recordStateController = Get.put(RecordStateController());
+
 class RecordSound {
   Codec _codec = Codec.aacMP4;
-  FlutterSoundPlayer? _mPlayer = FlutterSoundPlayer();
-  FlutterSoundRecorder? _mRecorder = FlutterSoundRecorder();
+  FlutterSoundPlayer? _mPlayer;
+  FlutterSoundRecorder? _mRecorder;
   bool _mPlayerIsInited = false;
   bool _mRecorderIsInited = false;
   bool _mplaybackReady = false;
   String _mPath = 'momsound.m4a';
-
-  final recordTimeController = Get.put(RecordTimeController());
-  final recordStateController = Get.put(RecordStateController());
 
   RecordSound._();
 
@@ -41,8 +44,8 @@ class RecordSound {
 
   void disposeSound() {
     _mPlayer!.closeAudioSession();
-    _mPlayer = null;
     _mRecorder!.closeAudioSession();
+    _mPlayer = null;
     _mRecorder = null;
   }
 
@@ -54,16 +57,22 @@ class RecordSound {
     return _mRecorder!.isPaused;
   }
 
-  bool isPlayerStopped() {
+  bool isRecordStopped() {
     return _mRecorder!.isStopped;
+  }
+
+  bool isPlayerStopped() {
+    return _mPlayer!.isStopped;
   }
 
   Future<void> openTheRecorder() async {
     var recordState = await Permission.microphone.request();
     var storageState = await Permission.storage.request();
+
     if (recordState != PermissionStatus.granted) {
       throw RecordingPermissionException('Microphone permission not granted');
     }
+
     if (storageState != PermissionStatus.granted) {
       print('저장 권한 에러');
     }
@@ -90,7 +99,7 @@ class RecordSound {
   void stopRecorder() async {
     await _mRecorder!.stopRecorder().then((value) {
       _mplaybackReady = true;
-      recordStateController.changePause();
+      recordStateController.changePreparePlay();
     });
   }
 
@@ -104,7 +113,7 @@ class RecordSound {
             fromURI: _mPath,
             codec: _codec,
             whenFinished: () {
-              recordStateController.changePause();
+              recordStateController.changePrepareRecord();
             })
         .then((value) {
       recordStateController.changePlaying();
@@ -125,7 +134,7 @@ class RecordSound {
 
   void stopPlayer() {
     _mPlayer!.stopPlayer().then((value) {
-      recordStateController.changePause();
+      recordStateController.changePreparePlay();
     });
   }
 

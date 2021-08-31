@@ -13,6 +13,9 @@ Widget saveButton(BuildContext context) {
     ),
     onTap: () {
       if (!rs.isPlayerStopped()) {
+        rs.stopPlayer();
+      }
+      if (!rs.isRecordPaused()) {
         rs.stopRecorder();
       }
       Get.dialog(save1(context));

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:momsori/widgets/save_dialog/save2.dart';
+
+import 'save2.dart';
 
 save1(BuildContext context) {
   return Column(

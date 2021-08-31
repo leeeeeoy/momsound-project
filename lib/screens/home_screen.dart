@@ -9,12 +9,7 @@ import 'package:momsori/widgets/topics.dart';
 import 'menu_screen.dart';
 //F4F3FBFF
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends StatelessWidget {
   // DateTime date = DateTime.parse(user.babyBirth);
 
   // _babyDay() {

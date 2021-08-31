@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:momsori/getx_controller/record_time_controller.dart';
-import 'package:momsori/screens/recoder_screen.dart';
-import 'package:momsori/widgets/record_buttons/save_button.dart';
+
+import '../../screens/recoder_screen.dart';
+import '../../utils/record_sound.dart';
+import 'save_button.dart';
 
 Widget recordingButton(BuildContext context) {
-  final recordTimeController = Get.put(RecordTimeController());
   double height = MediaQuery.of(context).size.height;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,

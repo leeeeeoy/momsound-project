@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:momsori/getx_controller/record_state_controller.dart';
-import 'package:momsori/utils/record_sound.dart';
-import 'package:momsori/utils/record_state.dart';
-import 'package:momsori/widgets/contants.dart';
-import 'package:momsori/widgets/record_buttons/pause_button.dart';
-import 'package:momsori/widgets/record_buttons/playing_button.dart';
-import 'package:momsori/widgets/record_buttons/prepare_play_button.dart';
-import 'package:momsori/widgets/record_buttons/prepare_record_button.dart';
-import 'package:momsori/widgets/record_buttons/recording_button.dart';
+
+import '../getx_controller/record_state_controller.dart';
+import '../utils/record_sound.dart';
+import '../utils/record_state.dart';
+import '../widgets/contants.dart';
+import '../widgets/record_buttons/pause_button.dart';
+import '../widgets/record_buttons/playing_button.dart';
+import '../widgets/record_buttons/prepare_play_button.dart';
+import '../widgets/record_buttons/recording_button.dart';
 
 final RecordSound rs = RecordSound();
 
@@ -19,20 +19,18 @@ class RecoderScreen extends StatefulWidget {
 }
 
 class _RecoderScreenState extends State<RecoderScreen> {
-  final recordStateController = Get.put(RecordStateController());
-
   @override
   void initState() {
-    rs.initSound();
     super.initState();
+    rs.initSound();
   }
 
-  // @override
-  // void dispose() {
-  //   rs.disposeSound();
-  //   recordStateController.changePrepareRecord();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    rs.disposeSound();
+    recordStateController.changePrepareRecord();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +50,6 @@ class _RecoderScreenState extends State<RecoderScreen> {
                       alignment: Alignment.topLeft,
                       child: InkWell(
                         onTap: () {
-                          rs.disposeSound();
-                          recordStateController.changePrepareRecord();
                           Get.back();
                         },
                         child: Container(
@@ -80,13 +76,13 @@ class _RecoderScreenState extends State<RecoderScreen> {
                     init: recordStateController,
                     builder: (RecordStateController _) {
                       if (_.recordState == RecordState.prepareRecord) {
-                        return prepareRecordButton(context);
+                        return preparePlayButton(context);
                       } else if (_.recordState == RecordState.recording) {
                         return recordingButton(context);
-                      } else if (_.recordState == RecordState.pause) {
-                        return pauseButton(context);
                       } else if (_.recordState == RecordState.preparePlay) {
                         return preparePlayButton(context);
+                      } else if (_.recordState == RecordState.pause) {
+                        return pauseButton(context);
                       } else {
                         return playingButton(context);
                       }
