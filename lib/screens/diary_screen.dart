@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'event.dart';
 import 'package:momsori/screens/diary_edit.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,33 +15,32 @@ class DiaryScreen extends StatefulWidget {
 
 class _DiaryScreenState extends State<DiaryScreen> {
   //event
-  Map<DateTime, List<Event>> selectedEvents;
+ // Map<DateTime, List<Event>> selectedEvents;
 
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
 
   var today = DateTime.now().toString().split(' ')[0].split('-');
 
-  TextEditingController _eventController = TextEditingController();
+  //TextEditingController _eventController = TextEditingController();
   CalendarBuilders _calendarBuilders = CalendarBuilders();
 
   @override
   void initState() {
     //event
-    selectedEvents = {};
+    //selectedEvents = {};
     _calendarBuilders = CalendarBuilders();
     super.initState();
   }
 
   //event
-  List<Event> _getEventsfromDay(DateTime date) {
-    return selectedEvents[date] ?? [];
-  }
+  // List<Event> _getEventsfromDay(DateTime date) {
+  //   return selectedEvents[date] ?? [];
+  // }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    _eventController.dispose();
+  //  _eventController.dispose();
     super.dispose();
   }
 
@@ -277,11 +275,11 @@ class _DiaryScreenState extends State<DiaryScreen> {
                               ),
                              
 
-                              ..._getEventsfromDay(selectedDay).map(
-                                (Event event) => ListTile(
-                                  title: Text(event.title),
-                                ),
-                              ),
+                              // ..._getEventsfromDay(selectedDay).map(
+                              //   (Event event) => ListTile(
+                              //     title: Text(event.title),
+                              //   ),
+                             // ),
                             ],
                           ),
                         ),
