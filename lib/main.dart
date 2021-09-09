@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:momsori/screens/splash_screen.dart';
+import 'package:get/get.dart';
+
+import 'screens/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,10 +17,20 @@ class MyApp extends StatelessWidget {
     ));
 
     return GetMaterialApp(
-      title: 'Momsori',
+      title: 'Momsound',
       theme: ThemeData(
         primaryColor: Color(0xFFFFA9A9),
         fontFamily: 'Noto_Sans_KR',
+        inputDecorationTheme: InputDecorationTheme(
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xffffa9a9))),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffffa9a9)),
+          ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffffa9a9)),
+          ),
+        ),
       ),
       home: SplashScreen(),
       localizationsDelegates: [

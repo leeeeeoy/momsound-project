@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:momsori/models/user_test.dart';
 import 'package:momsori/screens/diary_screen.dart';
 import 'package:momsori/screens/home_screen.dart';
 import 'package:momsori/screens/storage_screen.dart';
 
 import 'taedam_screen.dart';
-
-UserTest user;
 
 class MainScreen extends StatefulWidget {
   @override

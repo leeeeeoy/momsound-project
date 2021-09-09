@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:momsori/getx_controller/user_controller.dart';
 import 'package:momsori/screens/recoder_screen.dart';
 import 'package:momsori/widgets/BubblePainter2.dart';
 import 'package:momsori/widgets/topics.dart';
@@ -9,36 +10,8 @@ import 'package:momsori/widgets/topics.dart';
 import 'menu_screen.dart';
 //F4F3FBFF
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  // DateTime date = DateTime.parse(user.babyBirth);
-
-  // _babyDay() {
-  //   var k = DateTime(
-  //     date.year,
-  //     date.month,
-  //     date.day,
-  //   )
-  //       .difference(DateTime(
-  //         DateTime.now().year,
-  //         DateTime.now().month,
-  //         DateTime.now().day,
-  //       ))
-  //       .inDays;
-  //   return k;
-  // }
-  //
-  // _babyWeek() {
-  //   return (40 - _babyDay() ~/ 7);
-  // }
-  //
-  // _babyMonth() {
-  //   return (_babyWeek() ~/ 4 + 1);
-  // }
+class HomeScreen extends StatelessWidget {
+  final user = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,23 +24,23 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: 0.03 * height,
+            height: 0.02 * height,
           ),
           Container(
             height: 0.05 * height,
             child: Padding(
               padding: EdgeInsets.only(
-                left: 15,
-                right: 15,
+                left: 0.05 * width,
+                right: 0.05 * width,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '14주차',
+                    '${user.babyWeek()}주차',
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 24,
+                      fontSize: 0.06 * width,
                     ),
                   ),
                   InkWell(
@@ -76,8 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: SvgPicture.asset(
                       'assets/icons/세팅선택x.svg',
-                      width: 36,
-                      height: 36,
+                      width: 0.08 * width,
+                      height: 0.08 * width,
                     ),
                   ),
                 ],
@@ -91,50 +64,48 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 0.05 * height,
             child: Center(
               child: Text(
-                // '${user.babyNickname}',
-                '동동이',
+                '${user.userName}',
                 style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 0.04 * height,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
           ),
-          SizedBox(
-            height: 7,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                // '${user.babyBirth} 예정',
-                '2021.12.31 예정',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
+          Container(
+            height: 0.03 * height,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '${user.babyBirth} 예정',
+                  style: TextStyle(
+                    fontSize: 0.02 * height,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 0.025 * width,
-              ),
-              Text(
-                '|',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
+                SizedBox(
+                  width: 0.025 * width,
                 ),
-              ),
-              SizedBox(
-                width: 0.025 * width,
-              ),
-              Text(
-                'D-190',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
+                Text(
+                  '|',
+                  style: TextStyle(
+                    fontSize: 0.02 * height,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: 0.025 * width,
+                ),
+                Text(
+                  'D-${user.babyDay()}',
+                  style: TextStyle(
+                    fontSize: 0.02 * height,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
             height: 0.05 * height,

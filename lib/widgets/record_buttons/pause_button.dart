@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:momsori/screens/recoder_screen.dart';
-import 'package:momsori/widgets/record_buttons/save_button.dart';
+
+import '../../screens/recoder_screen.dart';
+import '../../utils/record_sound.dart';
+import 'save_button.dart';
 
 Widget pauseButton(BuildContext context) {
   double height = MediaQuery.of(context).size.height;
+
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Obx(() {
         return Text(
@@ -26,14 +30,14 @@ Widget pauseButton(BuildContext context) {
           InkWell(
             child: SvgPicture.asset(
               'assets/icons/play_arrow-24px (1) 1.svg',
-              height: 50,
+              height: 0.05 * height,
             ),
             onTap: !rs.isPlayerPaused() ? rs.play : rs.resumePlayer,
           ),
           InkWell(
             child: SvgPicture.asset(
               'assets/icons/record_icon.svg',
-              height: 60,
+              height: 0.07 * height,
             ),
             onTap: rs.record,
           ),

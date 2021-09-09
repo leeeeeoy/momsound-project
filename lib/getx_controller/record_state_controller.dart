@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:momsori/utils/record_state.dart';
+
+import '../utils/record_state.dart';
 
 class RecordStateController extends GetxController {
   RecordState recordState = RecordState.prepareRecord;

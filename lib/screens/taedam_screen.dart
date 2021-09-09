@@ -49,7 +49,7 @@ class _TaedamScreenState extends State<TaedamScreen> {
                         style: TextStyle(
                           color: Color(0xFFFFA9A9),
                           fontWeight: FontWeight.w900,
-                          fontSize: 15,
+                          fontSize: 0.04 * width,
                         ),
                       ),
                     ),
@@ -62,7 +62,7 @@ class _TaedamScreenState extends State<TaedamScreen> {
                         "${index + 1}",
                         style: TextStyle(
                           fontWeight: FontWeight.w300,
-                          fontSize: 14,
+                          fontSize: 0.03 * width,
                         ),
                       ),
                     ),
@@ -90,7 +90,7 @@ class _TaedamScreenState extends State<TaedamScreen> {
               value: _month.toDouble(),
               min: 0,
               max: 9,
-              // label: '$_month',
+              // label: '라벨',
               divisions: 9,
               onChanged: (double newValue) {
                 setState(() {
