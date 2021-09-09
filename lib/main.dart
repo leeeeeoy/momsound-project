@@ -21,6 +21,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFFFFA9A9),
         fontFamily: 'Noto_Sans_KR',
+        inputDecorationTheme: InputDecorationTheme(
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xffffa9a9))),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffffa9a9)),
+          ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffffa9a9)),
+          ),
+        ),
       ),
       home: SplashScreen(),
       localizationsDelegates: [

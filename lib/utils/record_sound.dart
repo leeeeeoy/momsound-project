@@ -3,15 +3,16 @@ import 'dart:io';
 
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:get/get.dart';
+import 'package:momsori/getx_controller/record_state_controller.dart';
+import 'package:momsori/getx_controller/record_time_controller.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../getx_controller/record_time_controller.dart';
-import '../getx_controller/record_state_controller.dart';
+final recordTimeController =
+    Get.put<RecordTimeController>(RecordTimeController());
 
-final recordTimeController = Get.put(RecordTimeController());
-
-final recordStateController = Get.put(RecordStateController());
+final recordStateController =
+    Get.put<RecordStateController>(RecordStateController());
 
 class RecordSound {
   Codec _codec = Codec.aacMP4;
@@ -148,6 +149,8 @@ class RecordSound {
     String outputFile = '${directory.path}$fileName.m4a';
     await flutterSoundHelper.convertFile(
         inputFile, Codec.aacMP4, outputFile, Codec.aacADTS);
+
+    recordTimeController.resetRecordTime();
   }
 
   String recordTimeValue(Duration recordTime) {

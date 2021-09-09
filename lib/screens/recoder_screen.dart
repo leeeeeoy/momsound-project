@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../getx_controller/record_state_controller.dart';
-import '../utils/record_sound.dart';
-import '../utils/record_state.dart';
-import '../widgets/contants.dart';
-import '../widgets/record_buttons/pause_button.dart';
-import '../widgets/record_buttons/playing_button.dart';
-import '../widgets/record_buttons/prepare_play_button.dart';
-import '../widgets/record_buttons/recording_button.dart';
+import 'package:momsori/getx_controller/record_state_controller.dart';
+import 'package:momsori/utils/record_sound.dart';
+import 'package:momsori/utils/record_state.dart';
+import 'package:momsori/widgets/contants.dart';
+import 'package:momsori/widgets/record_buttons/pause_button.dart';
+import 'package:momsori/widgets/record_buttons/playing_button.dart';
+import 'package:momsori/widgets/record_buttons/prepare_play_button.dart';
+import 'package:momsori/widgets/record_buttons/recording_button.dart';
 
 final RecordSound rs = RecordSound();
 
@@ -38,7 +37,7 @@ class _RecoderScreenState extends State<RecoderScreen> {
 
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         body: Padding(
           padding: EdgeInsets.all(10),
           child: Center(
@@ -51,6 +50,7 @@ class _RecoderScreenState extends State<RecoderScreen> {
                       child: InkWell(
                         onTap: () {
                           Get.back();
+                          recordTimeController.resetRecordTime();
                         },
                         child: Container(
                           height: 50,
