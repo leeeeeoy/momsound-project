@@ -3,7 +3,7 @@ description: 맘소리 프로젝트
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -19,6 +19,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
+
 
 dependencies:
   flutter:
@@ -46,6 +47,8 @@ dependencies:
   draggable_scrollbar: ^0.1.0
   freezed_annotation:
   keep_keyboard_popup_menu:
+  table_calendar: ^3.0.2
+  modal_bottom_sheet: 1.0.0+1
 
 dev_dependencies:
   flutter_test:
