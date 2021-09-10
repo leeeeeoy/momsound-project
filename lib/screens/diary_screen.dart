@@ -15,7 +15,7 @@ class DiaryScreen extends StatefulWidget {
 
 class _DiaryScreenState extends State<DiaryScreen> {
   //event
- // Map<DateTime, List<Event>> selectedEvents;
+  // Map<DateTime, List<Event>> selectedEvents;
 
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
@@ -40,7 +40,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
 
   @override
   void dispose() {
-  //  _eventController.dispose();
+    //  _eventController.dispose();
     super.dispose();
   }
 
@@ -115,7 +115,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
               selectedDayPredicate: (DateTime date) {
                 return isSameDay(selectedDay, date);
               },
-              
+
               onDaySelected: (DateTime selectDay, DateTime focusDay) {
                 setState(() {
                   var year = focusDay.year;
@@ -124,8 +124,6 @@ class _DiaryScreenState extends State<DiaryScreen> {
                   var week = selectDay.weekday;
                   selectedDay = selectDay;
                   focusedDay = focusDay;
-
-                  
 
                   showModalBottomSheet(
                     context: context,
@@ -137,7 +135,6 @@ class _DiaryScreenState extends State<DiaryScreen> {
                       return Container(
                         height: 350,
                         child: Container(
-                          
                           padding: EdgeInsets.only(top: 10),
                           child: ListView(
                             children: [
@@ -173,78 +170,114 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                 ],
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 20, top: 5 ),
+                                padding: EdgeInsets.only(left: 20, top: 5),
                                 child: Column(
                                   children: [
                                     Row(
                                       children: [
-                                        Text('감정상태/건강상태',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold
-                                        ),
+                                        Text(
+                                          '감정상태/건강상태',
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
                                         )
                                       ],
                                     ),
-                                    SizedBox(height: 10,),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
                                     Row(
                                       children: [
-                                        Icon(Icons.circle, color: Color(0xFFD3E7E4),size: 36,),
-                                        SizedBox(width: 10,),
-                                        SvgPicture.asset('assets/icons/Frame 40.svg',width: 36,height: 36,),
+                                        Icon(
+                                          Icons.circle,
+                                          color: Color(0xFFD3E7E4),
+                                          size: 36,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        SvgPicture.asset(
+                                          'assets/icons/Frame 40.svg',
+                                          width: 36,
+                                          height: 36,
+                                        ),
                                       ],
                                     ),
                                     Container(
-                                      padding: EdgeInsets.only(left: 0, top: 10, right: 20),
+                                      padding: EdgeInsets.only(
+                                          left: 0, top: 10, right: 20),
                                       child: Column(
                                         children: [
                                           Row(
                                             children: [
-                                              Text('녹음파일',
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold
-                                              ),)
+                                              Text(
+                                                '녹음파일',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
                                             ],
                                           ),
-                                         SizedBox(height: 10,),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Column(
                                                 children: [
-                                                  SvgPicture.asset('assets/icons/play_arrow-24px_3.svg',width: 36,),
+                                                  SvgPicture.asset(
+                                                    'assets/icons/play_arrow-24px_3.svg',
+                                                    width: 36,
+                                                  ),
                                                   Container(
                                                     width: 100,
-                                                    child: Text('열자를 넘게하면 이렇게 됨!',
-                                                    style: TextStyle(fontSize: 10),
-                                                    overflow: TextOverflow.ellipsis,),
+                                                    child: Text(
+                                                      '열자를 넘게하면 이렇게 됨!',
+                                                      style: TextStyle(
+                                                          fontSize: 10),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
                                                   )
-                                                  
-                                                ],
-                                              ),
-                                             Column(
-                                                children: [
-                                                  SvgPicture.asset('assets/icons/play_arrow-24px_3.svg',width: 36,),
-                                                  Container(
-                                                    width: 100,
-                                                    child: Text('열자를 넘게하면 이렇게 됨!',
-                                                    style: TextStyle(fontSize: 10),
-                                                    overflow: TextOverflow.ellipsis,),
-                                                  )
-                                                  
                                                 ],
                                               ),
                                               Column(
                                                 children: [
-                                                  SvgPicture.asset('assets/icons/play_arrow-24px_3.svg',width: 36,),
+                                                  SvgPicture.asset(
+                                                    'assets/icons/play_arrow-24px_3.svg',
+                                                    width: 36,
+                                                  ),
                                                   Container(
                                                     width: 100,
-                                                    child: Text('열자를 넘게하면 이렇게 됨!',
-                                                    style: TextStyle(fontSize: 10),
-                                                    overflow: TextOverflow.ellipsis,),
+                                                    child: Text(
+                                                      '열자를 넘게하면 이렇게 됨!',
+                                                      style: TextStyle(
+                                                          fontSize: 10),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
                                                   )
-                                                  
+                                                ],
+                                              ),
+                                              Column(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    'assets/icons/play_arrow-24px_3.svg',
+                                                    width: 36,
+                                                  ),
+                                                  Container(
+                                                    width: 100,
+                                                    child: Text(
+                                                      '열자를 넘게하면 이렇게 됨!',
+                                                      style: TextStyle(
+                                                          fontSize: 10),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  )
                                                 ],
                                               ),
                                             ],
@@ -252,18 +285,19 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                         ],
                                       ),
                                     ),
-
                                     Container(
                                       padding: EdgeInsets.only(top: 10),
                                       child: Column(
                                         children: [
                                           Row(
                                             children: [
-                                              Text('메모',
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold
-                                              ),)
+                                              Text(
+                                                '메모',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
                                             ],
                                           ),
                                           TextField()
@@ -273,13 +307,12 @@ class _DiaryScreenState extends State<DiaryScreen> {
                                   ],
                                 ),
                               ),
-                             
 
                               // ..._getEventsfromDay(selectedDay).map(
                               //   (Event event) => ListTile(
                               //     title: Text(event.title),
                               //   ),
-                             // ),
+                              // ),
                             ],
                           ),
                         ),
@@ -290,8 +323,6 @@ class _DiaryScreenState extends State<DiaryScreen> {
                 print(focusedDay);
                 print(selectedDay);
               },
-             
-
             ),
           ),
           Padding(
@@ -299,7 +330,6 @@ class _DiaryScreenState extends State<DiaryScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-               
                 InkWell(
                   onTap: () {
                     Get.to(DiaryEdit());
@@ -312,25 +342,22 @@ class _DiaryScreenState extends State<DiaryScreen> {
               ],
             ),
           ),
-          
         ],
       ),
     );
   }
 }
 
-
-
-  Widget _buildEventsMarker(DateTime date) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      margin: const EdgeInsets.all(4.0),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(36.0),
-          border: Border.all(width: 2, color: Colors.blue[300])),
-    );
-  }
+Widget _buildEventsMarker(DateTime date) {
+  return AnimatedContainer(
+    duration: const Duration(milliseconds: 300),
+    margin: const EdgeInsets.all(4.0),
+    alignment: Alignment.center,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(36.0),
+        border: Border.all(width: 2, color: Colors.blue[300]!)),
+  );
+}
 
 Widget buildBottomSheet(BuildContext context) {
   return Container();
