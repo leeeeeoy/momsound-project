@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFFFFA9A9),
         fontFamily: 'Noto_Sans_KR',
+        backgroundColor: Colors.white,
         inputDecorationTheme: InputDecorationTheme(
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Color(0xffffa9a9))),

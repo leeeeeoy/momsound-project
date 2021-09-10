@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:momsori/getx_controller/user_controller.dart';
+import 'package:momsori/screens/menu_screen.dart';
 import 'package:momsori/screens/recoder_screen.dart';
-import 'package:momsori/widgets/BubblePainter2.dart';
+import 'package:momsori/widgets/custom_bubble/bubble_painter2.dart';
 import 'package:momsori/widgets/topics.dart';
 
-import 'menu_screen.dart';
 //F4F3FBFF
 
 class HomeScreen extends StatelessWidget {
@@ -113,50 +113,37 @@ class HomeScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(5),
             height: 0.47 * height,
-            child: Stack(
+            child: Column(
               children: [
-                Column(
-                  children: [
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          height: height * 0.13,
-                          width: width * 0.8,
-                          child: CustomPaint(
-                            painter: BubblePainter2(),
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                bottom: 21,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  topic[0],
-                                  style: TextStyle(
-                                    // color: Colors.white,
-                                    // color: Color(0xFFFFA9A9),
-                                    color: Color(0xFF7C7C7C),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                Container(
+                  height: width * 0.2,
+                  width: width * 0.8,
+                  child: CustomPaint(
+                    painter: BubblePainter2(),
+                    child: Center(
+                      child: Text(
+                        topic[0],
+                        style: TextStyle(
+                          color: Color(0xFFD7C1B9),
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
                         ),
-                      ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        right: 10,
-                      ),
-                      child: Image.asset(
-                        "assets/images/gif_check.gif",
-                        height: 0.32 * height,
-                        width: 0.7 * width,
                       ),
                     ),
-                  ],
+                  ),
+                ),
+                SizedBox(
+                  height: height * 0.03,
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                    right: 10,
+                  ),
+                  child: Image.asset(
+                    "assets/images/gif_check.gif",
+                    height: 0.32 * height,
+                    width: 0.7 * width,
+                  ),
                 ),
               ],
             ),
