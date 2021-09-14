@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:momsori/screens/diary_screen.dart';
 import 'package:momsori/screens/home_screen.dart';
 import 'package:momsori/screens/storage_screen.dart';
@@ -20,6 +21,9 @@ class _MainScreenState extends State<MainScreen> {
     // jsonData = Get.arguments;
     // user = UserTest.fromJson(jsonData);
     super.initState();
+    if (Get.arguments != null) {
+      _selectedIndex = Get.arguments;
+    }
   }
 
   @override

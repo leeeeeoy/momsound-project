@@ -1,46 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:momsori/getx_controller/record_sound_controller.dart';
+import 'package:momsori/widgets/record_buttons/save_button.dart';
 
-import '../../screens/recoder_screen.dart';
-import '../../utils/record_sound.dart';
-import 'save_button.dart';
+class PlayingButton extends StatelessWidget {
+  final recordSoundController =
+      Get.find<RecordSoundController>(tag: 'recordSound');
 
-Widget playingButton(BuildContext context) {
-  double height = MediaQuery.of(context).size.height;
-
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Obx(() {
-        return Text(
-          recordTimeController.recordTime.value,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        );
-      }),
-      SizedBox(
-        height: 0.1 * height,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          InkWell(
-            child: SvgPicture.asset(
-              'assets/icons/pause-black-18dp 2.svg',
-              height: 0.05 * height,
+  @override
+  Widget build(BuildContext context) {
+    double height = Get.size.height;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Obx(() => Text(
+              recordSoundController.recordTime.value,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            )),
+        SizedBox(
+          height: 0.1 * height,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              child: SvgPicture.asset(
+                'assets/icons/pause-black-18dp 2.svg',
+                height: 0.05 * height,
+              ),
+              onTap: recordSoundController.pausePlayer,
             ),
-            onTap: rs.pausePlayer,
-          ),
-          SvgPicture.asset(
-            'assets/icons/record_icon-1.svg',
-            height: 0.07 * height,
-          ),
-          saveButton(context),
-        ],
-      ),
-    ],
-  );
+            SvgPicture.asset(
+              'assets/icons/record_icon-1.svg',
+              height: 0.08 * height,
+            ),
+            SaveButton(),
+          ],
+        ),
+      ],
+    );
+  }
 }

@@ -17,7 +17,10 @@ class _NicknameScreenState extends State<NicknameScreen> {
   String _bText = '';
   String _dText = '';
 
-  final userController = Get.put<UserController>(UserController());
+  final userController = Get.put<UserController>(
+    UserController(),
+    permanent: true,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +123,7 @@ class _NicknameScreenState extends State<NicknameScreen> {
                     focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Color(0xFFE5E5E5))),
                   ),
+                  keyboardType: TextInputType.number,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp("[0-9]")),
                   ],
@@ -130,14 +134,7 @@ class _NicknameScreenState extends State<NicknameScreen> {
                 Container(
                   height: height * 0.06,
                   child: ElevatedButton(
-                    style:
-                        // ElevatedButton.styleFrom(
-                        //   primary:
-                        //       _mText == '' || _bText == '' || _dText.length == 8
-                        //           ? Color(0xFFDADADA)
-                        //           : Color(0xFFFFA9A9),
-                        // ),
-                        ButtonStyle(
+                    style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.resolveWith((states) {
                         if (states.contains(MaterialState.disabled)) {
