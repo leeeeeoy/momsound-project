@@ -7,7 +7,7 @@ import 'package:momsori/getx_controller/record_list_controller.dart';
 import 'package:momsori/screens/main_screen.dart';
 import 'package:momsori/widgets/save_dialog/add_category.dart';
 
-Widget SaveDialog(BuildContext context) {
+Widget saveDialog(BuildContext context) {
   final controller = Get.put<RecordListController>(RecordListController());
   final fileNameController = Get.put<FileNameController>(FileNameController());
 
@@ -165,7 +165,10 @@ Widget SaveDialog(BuildContext context) {
                     '탭하면 보관함으로 이동',
                     snackPosition: SnackPosition.BOTTOM,
                     onTap: (_) {
-                      Get.to(() => MainScreen());
+                      Get.offAll(
+                        () => MainScreen(),
+                        arguments: 2,
+                      );
                     },
                     backgroundColor: Colors.grey.withOpacity(0.5),
                     overlayBlur: 3.0,

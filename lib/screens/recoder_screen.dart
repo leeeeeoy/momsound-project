@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:momsori/getx_controller/record_state_controller.dart';
-import 'package:momsori/utils/record_sound.dart';
+import 'package:momsori/getx_controller/record_sound_controller.dart';
 import 'package:momsori/utils/record_state.dart';
 import 'package:momsori/widgets/contants.dart';
 import 'package:momsori/widgets/record_buttons/pause_button.dart';
 import 'package:momsori/widgets/record_buttons/playing_button.dart';
 import 'package:momsori/widgets/record_buttons/prepare_play_button.dart';
+import 'package:momsori/widgets/record_buttons/prepare_record_button.dart';
 import 'package:momsori/widgets/record_buttons/recording_button.dart';
-
-final RecordSound rs = RecordSound();
 
 class RecoderScreen extends StatefulWidget {
   @override
@@ -18,17 +16,20 @@ class RecoderScreen extends StatefulWidget {
 }
 
 class _RecoderScreenState extends State<RecoderScreen> {
+  final recordSoundController = Get.put<RecordSoundController>(
+    RecordSoundController(),
+    tag: 'recordSound',
+  );
+
   @override
   void initState() {
     super.initState();
-    rs.initSound();
   }
 
   @override
   void dispose() {
     super.dispose();
-    rs.disposeSound();
-    recordStateController.changePrepareRecord();
+    recordSoundController.resetRecordTime();
   }
 
   @override
@@ -50,7 +51,6 @@ class _RecoderScreenState extends State<RecoderScreen> {
                       child: InkWell(
                         onTap: () {
                           Get.back();
-                          recordTimeController.resetRecordTime();
                         },
                         child: Container(
                           height: 50,
@@ -72,19 +72,22 @@ class _RecoderScreenState extends State<RecoderScreen> {
                   height: 0.65 * height,
                 ),
                 Expanded(
-                  child: GetBuilder(
-                    init: recordStateController,
-                    builder: (RecordStateController _) {
-                      if (_.recordState == RecordState.prepareRecord) {
-                        return preparePlayButton(context);
-                      } else if (_.recordState == RecordState.recording) {
-                        return recordingButton(context);
-                      } else if (_.recordState == RecordState.preparePlay) {
-                        return preparePlayButton(context);
-                      } else if (_.recordState == RecordState.pause) {
-                        return pauseButton(context);
+                  child: Obx(
+                    () {
+                      if (recordSoundController.recordState.value ==
+                          RecordState.prepareRecord) {
+                        return PrepareRecordButton();
+                      } else if (recordSoundController.recordState.value ==
+                          RecordState.recording) {
+                        return RecordingButton();
+                      } else if (recordSoundController.recordState.value ==
+                          RecordState.preparePlay) {
+                        return PreparePlayingButton();
+                      } else if (recordSoundController.recordState.value ==
+                          RecordState.pause) {
+                        return PauseButton();
                       } else {
-                        return playingButton(context);
+                        return PlayingButton();
                       }
                     },
                   ),
