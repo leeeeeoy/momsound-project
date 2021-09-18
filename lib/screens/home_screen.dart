@@ -8,8 +8,6 @@ import 'package:momsori/screens/recoder_screen.dart';
 import 'package:momsori/widgets/custom_bubble/bubble_painter2.dart';
 import 'package:momsori/widgets/topics.dart';
 
-//F4F3FBFF
-
 class HomeScreen extends StatelessWidget {
   final user = Get.find<UserController>();
 
@@ -125,7 +123,7 @@ class HomeScreen extends StatelessWidget {
                         topic[0],
                         style: TextStyle(
                           color: Color(0xFFD7C1B9),
-                          fontSize: 18,
+                          fontSize: width * 0.04,
                           fontWeight: FontWeight.w700,
                         ),
                       ),

@@ -6,6 +6,7 @@ import 'package:momsori/widgets/save_dialog/save_dialog.dart';
 addCategory(BuildContext context1) {
   final controller = Get.put(RecordListController());
   String newCategory = '';
+  final height = Get.size.height;
 
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Dialog(
@@ -13,7 +14,7 @@ addCategory(BuildContext context1) {
       insetPadding: EdgeInsets.all(1),
       child: Container(
         width: double.infinity,
-        height: 200,
+        height: height * 0.23,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           color: Colors.white,
@@ -25,7 +26,7 @@ addCategory(BuildContext context1) {
             Text(
               '카테고리 추가',
               style: TextStyle(
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w700,
                 fontSize: 22,
               ),
             ),
@@ -37,7 +38,7 @@ addCategory(BuildContext context1) {
               },
             ),
             SizedBox(
-              height: 50,
+              height: height * 0.06,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -50,7 +51,7 @@ addCategory(BuildContext context1) {
                     '취소',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                      fontSize: 20,
                       color: Color(0xFFFFA9A9),
                     ),
                   ),

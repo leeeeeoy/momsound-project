@@ -15,12 +15,14 @@ Widget saveDialog(BuildContext context) {
     controller.changeCategory(Get.arguments);
   }
 
+  final height = Get.size.height;
+
   return Dialog(
     backgroundColor: Colors.transparent,
     insetPadding: EdgeInsets.all(1),
     child: Container(
       width: double.infinity,
-      height: 270,
+      height: height * 0.35,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Colors.white,
@@ -43,7 +45,7 @@ Widget saveDialog(BuildContext context) {
             cursorColor: Color(0xffa9a9),
           ),
           SizedBox(
-            height: 40,
+            height: height * 0.05,
           ),
           Text(
             '카테고리',
@@ -53,7 +55,7 @@ Widget saveDialog(BuildContext context) {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: height * 0.02,
           ),
           GetBuilder<RecordListController>(
             init: controller,
@@ -77,60 +79,72 @@ Widget saveDialog(BuildContext context) {
                 shadowColor: Colors.grey,
                 child: child,
               ),
-              menuItemBuilder: (context, closePopup) =>
-                  List<KeepKeyboardPopupMenuItem>.generate(
-                _.categories.length,
-                (index) => KeepKeyboardPopupMenuItem(
-                    height: 35,
-                    child: index == _.categories.length - 1
-                        ? GestureDetector(
-                            onTap: () {
-                              closePopup();
-                              Get.dialog(addCategory(context));
-                            },
-                            child: Center(
-                              child: Text(
-                                '${_.categories[index]}',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container(
-                            height: 35,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                controller.categoryIndex == index
-                                    ? SvgPicture.asset(
-                                        'assets/icons/체크박스선택.svg')
-                                    : SvgPicture.asset(
-                                        'assets/icons/체크박스선택x.svg'),
-                                SizedBox(
-                                  width: 15,
-                                ),
-                                Text(
-                                  '${_.categories[index]}',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18,
+              menuBuilder: (context, closePopup) => Container(
+                padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+                height: height * 0.3,
+                width: 140,
+                child: ListView.builder(
+                  itemCount: _.categories.length,
+                  itemBuilder: (context, index) {
+                    return KeepKeyboardPopupMenuItem(
+                        height: 35,
+                        child: index == _.categories.length - 1
+                            ? GestureDetector(
+                                onTap: () {
+                                  closePopup();
+                                  Get.dialog(
+                                    addCategory(context),
+                                  );
+                                },
+                                child: Center(
+                                  child: Text(
+                                    '${_.categories[index]}',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                    onTap: () {
-                      controller.changeIndex(index);
-                      controller.changeCategory(controller.categories[index]);
-                      closePopup();
-                    }),
+                              )
+                            : Container(
+                                height: 35,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    controller.categoryIndex == index
+                                        ? SvgPicture.asset(
+                                            'assets/icons/체크박스선택.svg')
+                                        : SvgPicture.asset(
+                                            'assets/icons/체크박스선택x.svg'),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text(
+                                      '${_.categories[index]}',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                        onTap: index == _.categories.length - 1
+                            ? null
+                            : () {
+                                controller.changeIndex(index);
+                                controller.changeCategory(
+                                    controller.categories[index]);
+                                closePopup();
+                              });
+                  },
+                ),
               ),
             ),
           ),
           SizedBox(
-            height: 40,
+            height: height * 0.05,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -10,15 +10,10 @@ class UserController extends GetxController {
   );
 
   updateUserName(String name, String nickName, String babyBirth) {
-    String myBirth = babyBirth.substring(0, 4) +
-        '.' +
-        babyBirth.substring(4, 6) +
-        '.' +
-        babyBirth.substring(6, 8);
     user = user.copyWith(
       name: name,
       nickName: nickName,
-      babyBirth: myBirth,
+      babyBirth: babyBirth,
     );
     update();
   }
