@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:momsori/getx_controller/record_sound_controller.dart';
@@ -10,7 +11,6 @@ class PreparePlayingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = Get.size.height;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -18,11 +18,11 @@ class PreparePlayingButton extends StatelessWidget {
               recordSoundController.recordTime.value,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
+                fontSize: 20.sp,
               ),
             )),
         SizedBox(
-          height: 0.1 * height,
+          height: 63.h,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -30,14 +30,14 @@ class PreparePlayingButton extends StatelessWidget {
             InkWell(
               child: SvgPicture.asset(
                 'assets/icons/play_arrow-24px (1) 1.svg',
-                height: 0.05 * height,
+                height: 25.h,
               ),
               onTap: recordSoundController.play,
             ),
             InkWell(
               child: SvgPicture.asset(
                 'assets/icons/record_icon.svg',
-                height: 0.08 * height,
+                height: 52.h,
               ),
               onTap: recordSoundController.record,
             ),

@@ -47,8 +47,9 @@ dependencies:
   freezed_annotation:
   keep_keyboard_popup_menu:
   table_calendar: ^3.0.2
-  modal_bottom_sheet: 1.0.0+1
+  modal_bottom_sheet: ^2.0.0
   easy_mask:
+  flutter_screenutil:
 
 dev_dependencies:
   flutter_test:

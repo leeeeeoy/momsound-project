@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:momsori/getx_controller/record_list_controller.dart';
 import 'package:momsori/widgets/save_dialog/save_dialog.dart';
@@ -6,7 +7,6 @@ import 'package:momsori/widgets/save_dialog/save_dialog.dart';
 addCategory(BuildContext context1) {
   final controller = Get.put(RecordListController());
   String newCategory = '';
-  final height = Get.size.height;
 
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Dialog(
@@ -14,12 +14,12 @@ addCategory(BuildContext context1) {
       insetPadding: EdgeInsets.all(1),
       child: Container(
         width: double.infinity,
-        height: height * 0.23,
+        height: 145.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           color: Colors.white,
         ),
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+        padding: EdgeInsets.fromLTRB(15.w, 15.h, 17.w, 15.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -27,7 +27,7 @@ addCategory(BuildContext context1) {
               '카테고리 추가',
               style: TextStyle(
                 fontWeight: FontWeight.w700,
-                fontSize: 22,
+                fontSize: 14.sp,
               ),
             ),
             TextFormField(
@@ -38,7 +38,7 @@ addCategory(BuildContext context1) {
               },
             ),
             SizedBox(
-              height: height * 0.06,
+              height: 20.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -51,7 +51,7 @@ addCategory(BuildContext context1) {
                     '취소',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 14.sp,
                       color: Color(0xFFFFA9A9),
                     ),
                   ),
@@ -60,7 +60,7 @@ addCategory(BuildContext context1) {
                   '|',
                   style: TextStyle(
                     color: Color(0xffdadada),
-                    fontSize: 20,
+                    fontSize: 18.sp,
                   ),
                 ),
                 InkWell(
@@ -75,7 +75,7 @@ addCategory(BuildContext context1) {
                     '확인',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 14.sp,
                       color: Color(0xFFFFA9A9),
                     ),
                   ),

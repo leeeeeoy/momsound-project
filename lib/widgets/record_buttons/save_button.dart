@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:momsori/getx_controller/record_sound_controller.dart';
@@ -10,11 +11,10 @@ class SaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = Get.size.height;
     return InkWell(
       child: SvgPicture.asset(
         'assets/icons/stop-black-18dp_2.svg',
-        height: 0.07 * height,
+        height: 30.h,
       ),
       onTap: () {
         if (!recordSoundController.isPlayerStopped) {
