@@ -1,3 +1,4 @@
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -106,11 +107,14 @@ class _NicknameScreenState extends State<NicknameScreen> {
                 ),
                 TextFormField(
                   onChanged: (nextText) {
+                    if (nextText.length == 4) nextText += '.';
+                    if (nextText.length == 7) nextText += '.';
                     setState(() {
                       _dText = nextText;
+                      print(nextText);
                     });
                   },
-                  maxLength: 8,
+                  maxLength: 10,
                   cursorColor: Color(0xFFFFA9A9),
                   decoration: InputDecoration(
                     hintText: '태아의 출생 예정일',
@@ -125,7 +129,10 @@ class _NicknameScreenState extends State<NicknameScreen> {
                   ),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                    // FilteringTextInputFormatter.allow(RegExp("[0-9\\.]")),
+                    TextInputMask(
+                      mask: '9999.99.99',
+                    ),
                   ],
                 ),
                 SizedBox(
@@ -145,7 +152,7 @@ class _NicknameScreenState extends State<NicknameScreen> {
                       }),
                     ),
                     onPressed:
-                        _mText != '' && _bText != '' && _dText.length == 8
+                        _mText != '' && _bText != '' && _dText.length == 10
                             ? () {
                                 FocusScopeNode currentFocus =
                                     FocusScope.of(context);
@@ -162,7 +169,7 @@ class _NicknameScreenState extends State<NicknameScreen> {
                       '다음',
                       style: TextStyle(
                         color:
-                            _mText != '' && _bText != '' && _dText.length == 8
+                            _mText != '' && _bText != '' && _dText.length == 10
                                 ? Colors.white
                                 : Colors.black,
                         fontSize: 18,

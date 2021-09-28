@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:momsori/screens/diary_screen.dart';
@@ -32,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
       child: Scaffold(
         bottomNavigationBar: BottomAppBar(
           child: Container(
-            height: 70,
+            height: 48.h,
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
