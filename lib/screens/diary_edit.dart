@@ -179,42 +179,16 @@ class DiaryEditState extends State<DiaryEdit> {
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
                       color = 0xFFF6E1CD),
-                  EmotionButton(widget.events = widget.events,
-                      selectDay = selectDay, color = 0xFFFBF4D8),
-                  // IconButton(
-                  //   constraints: BoxConstraints(),
-                  //   padding: EdgeInsets.only(top: 0),
-                  //   onPressed: () {
-                  //     {
-                  //       widget.events[selectDay] = [0xFFFBF4D8];
-                  //       print('추가됨');
-                  //       print(selectDay);
-                  //       print(widget.events);
-                  //       Navigator.pop(context, widget.events);
-                  //     }
-                  //   },
-                  //   icon: Icon(
-                  //     Icons.circle,
-                  //     color: Color(0xFFFBF4D8),
-                  //   ),
-                  // ),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      selectDay = selectDay, 
+                      color = 0xFFFBF4D8),
+          
 
-                  IconButton(
-                    constraints: BoxConstraints(),
-                    padding: EdgeInsets.only(top: 0),
-                    onPressed: () {
-                      widget.events[widget.selectedDay]
-                          [1] = ['assets/icons/Frame 40.svg'];
-
-                      print(widget.health[widget.selectedDay]);
-                    },
-                    icon: SvgPicture.asset('assets/icons/Frame 40.svg'),
-                  ),
-
-                  // EmotionButton(
-                  //     widget.events = widget.events,
-                  //     widget.selectedDay = widget.selectedDay,
-                  //     color = 0XFFFFFFFF),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      color = 0XFFFFFFFF),
                 ],
               ),
             ],
