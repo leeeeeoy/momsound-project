@@ -3,22 +3,51 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:momsori/screens/recoder_screen.dart';
+import 'package:momsori/screens/diary_screen.dart';
+import 'package:momsori/widgets/emotion_button.dart';
+import 'package:momsori/models/health.dart';
+import 'package:momsori/widgets/health_button.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DiaryEdit extends StatefulWidget {
+  // DiaryEdit(Map<DateTime, List> events, [DateTime selectedday]);
+  Map<DateTime, List> events;
+  DateTime selectedDay;
+  Map<DateTime, List> health;
+  int length;
+  Map<DateTime, List> diarytext;
+
+  DiaryEdit(
+      this.events, this.health, this.selectedDay, this.length, this.diarytext);
+
   @override
-  _DiaryEditState createState() => _DiaryEditState();
+  DiaryEditState createState() => DiaryEditState();
 }
 
-class _DiaryEditState extends State<DiaryEdit> {
+class DiaryEditState extends State<DiaryEdit> {
   String _year = DateTime.now().year.toString();
   String _month = DateTime.now().month.toString();
   String _day = DateTime.now().day.toString();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    DateTime selectDay = widget.selectedDay;
+    _year = selectDay.year.toString();
+    _day = selectDay.day.toString();
+    _month = selectDay.month.toString();
+    DiaryScreenState diaryScreen =
+        context.findAncestorStateOfType<DiaryScreenState>();
+
+    int color;
+    String image;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -27,9 +56,29 @@ class _DiaryEditState extends State<DiaryEdit> {
         ),
         backgroundColor: Colors.white,
         elevation: 5.0,
+        leading: IconButton(
+            onPressed: () {
+              widget.events.remove(widget.selectedDay);
+              widget.health.remove(widget.selectedDay);
+              //widget.health.remove(widget.selectedDay);
+
+              Navigator.pop(
+                  context, [widget.events, widget.health, widget.diarytext]);
+              print("ㅠㅠㅠ이벤트");
+              print(widget.length);
+            },
+            icon: Icon(Icons.arrow_back)),
         actions: [
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                if (widget.events[widget.selectedDay] == null) {
+                  widget.events[widget.selectedDay] = [0xffffff];
+                }
+                Navigator.pop(
+                    context, [widget.events, widget.health, widget.diarytext]);
+
+                print(widget.events);
+              },
               child: Text(
                 '확인',
                 style: TextStyle(
@@ -41,8 +90,7 @@ class _DiaryEditState extends State<DiaryEdit> {
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-        child: ListView(
-          children: [
+        child: ListView(children: [
           Row(
             children: [
               Container(
@@ -55,6 +103,7 @@ class _DiaryEditState extends State<DiaryEdit> {
                   },
                   child: Text(
                     '$_year 년 $_month 월 $_day 일',
+                    // '$widget.selectedDay',
                     style: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.normal,
@@ -84,20 +133,28 @@ class _DiaryEditState extends State<DiaryEdit> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  IconButton(
-                    constraints: BoxConstraints(),
-                    padding: EdgeInsets.only(top: 0),
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.circle,
-                      color: Color(0xFFE2EAD2),
-                    ),
-                  ),
-                  Icon(Icons.circle, color: Color(0xFFD3E7E4)),
-                  Icon(Icons.circle, color: Color(0xFFD3EBF4)),
-                  Icon(Icons.circle, color: Color(0xFFD6E2F3)),
-                  Icon(Icons.circle, color: Color(0xFFD7D5E4)),
-                  Icon(Icons.circle, color: Color(0xFFD7D5EA)),
+                  EmotionButton(widget.events = widget.events,
+                      selectDay = widget.selectedDay, color = 0xFFE2EAD2),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      color = 0xFFD3E7E4),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      color = 0xFFD3EBF4),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      color = 0xFFD6E2F3),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      color = 0xFFD7D5E4),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      color = 0xFFD7D5EA),
                 ],
               ),
               SizedBox(
@@ -106,12 +163,58 @@ class _DiaryEditState extends State<DiaryEdit> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Icon(Icons.circle, color: Color(0xFFECA8C4)),
-                  Icon(Icons.circle, color: Color(0xFFEFC2D9)),
-                  Icon(Icons.circle, color: Color(0xFFF2CDCA)),
-                  Icon(Icons.circle, color: Color(0xFFF6E1CD)),
-                  Icon(Icons.circle, color: Color(0xFFFBF4D8)),
-                  Icon(Icons.circle, color: Color(0XFFFFFFFF)),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      color = 0xFFECA8C4),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      color = 0xFFEFC2D9),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      color = 0xFFF2CDCA),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      color = 0xFFF6E1CD),
+                  EmotionButton(widget.events = widget.events,
+                      selectDay = selectDay, color = 0xFFFBF4D8),
+                  // IconButton(
+                  //   constraints: BoxConstraints(),
+                  //   padding: EdgeInsets.only(top: 0),
+                  //   onPressed: () {
+                  //     {
+                  //       widget.events[selectDay] = [0xFFFBF4D8];
+                  //       print('추가됨');
+                  //       print(selectDay);
+                  //       print(widget.events);
+                  //       Navigator.pop(context, widget.events);
+                  //     }
+                  //   },
+                  //   icon: Icon(
+                  //     Icons.circle,
+                  //     color: Color(0xFFFBF4D8),
+                  //   ),
+                  // ),
+
+                  IconButton(
+                    constraints: BoxConstraints(),
+                    padding: EdgeInsets.only(top: 0),
+                    onPressed: () {
+                      widget.events[widget.selectedDay]
+                          [1] = ['assets/icons/Frame 40.svg'];
+
+                      print(widget.health[widget.selectedDay]);
+                    },
+                    icon: SvgPicture.asset('assets/icons/Frame 40.svg'),
+                  ),
+
+                  // EmotionButton(
+                  //     widget.events = widget.events,
+                  //     widget.selectedDay = widget.selectedDay,
+                  //     color = 0XFFFFFFFF),
                 ],
               ),
             ],
@@ -132,13 +235,34 @@ class _DiaryEditState extends State<DiaryEdit> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SvgPicture.asset('assets/icons/Frame 40.svg'),
-                  SvgPicture.asset('assets/icons/Frame 41.svg'),
-                  SvgPicture.asset('assets/icons/Frame 42.svg'),
-                  SvgPicture.asset('assets/icons/Frame 42.svg'),
-                  SvgPicture.asset('assets/icons/Frame 43.svg'),
-                  SvgPicture.asset('assets/icons/Frame 44.svg'),
-                  SvgPicture.asset('assets/icons/Frame 51.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 40.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 41.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 42.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 42.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 43.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 44.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 51.svg'),
                 ],
               ),
               SizedBox(
@@ -147,13 +271,34 @@ class _DiaryEditState extends State<DiaryEdit> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SvgPicture.asset('assets/icons/Frame 45.svg'),
-                  SvgPicture.asset('assets/icons/Frame 46.svg'),
-                  SvgPicture.asset('assets/icons/Frame 47.svg'),
-                  SvgPicture.asset('assets/icons/Frame 48.svg'),
-                  SvgPicture.asset('assets/icons/Frame 49.svg'),
-                  SvgPicture.asset('assets/icons/Frame 52.svg'),
-                  SvgPicture.asset('assets/icons/Frame 50.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 45.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 46.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 47.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 48.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 49.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 52.svg'),
+                  HealthButton(
+                      widget.health = widget.health,
+                      widget.selectedDay = widget.selectedDay,
+                      image = 'assets/icons/Frame 50.svg'),
                 ],
               ),
             ],
@@ -172,7 +317,20 @@ class _DiaryEditState extends State<DiaryEdit> {
                     )
                   ],
                 ),
-                TextField()
+                TextField(
+                  onChanged: (text) {
+                    setState(() {
+                      widget.diarytext[widget.selectedDay] = [text];
+                    });
+                  },
+                ),
+                // Text(widget.diarytext)
+                // TextFormField(
+                //   onChanged: (nextText) {
+                //     setState(() {
+                //       _dText = nextText;
+                //     });
+                //   },
               ],
             ),
           ),
@@ -196,29 +354,38 @@ class _DiaryEditState extends State<DiaryEdit> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    InkWell(onTap: () {
-                      Get.to(RecoderScreen(), transition: Transition.downToUp);
-                    },
-                    child: SvgPicture.asset('assets/icons/record_ic.svg',
-                    width: 60,
-                    height: 60,
+                    InkWell(
+                      onTap: () {
+                        Get.to(RecoderScreen(),
+                            transition: Transition.downToUp);
+                      },
+                      child: SvgPicture.asset(
+                        'assets/icons/record_ic.svg',
+                        width: 60,
+                        height: 60,
+                      ),
                     ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(RecoderScreen(),
+                            transition: Transition.downToUp);
+                      },
+                      child: SvgPicture.asset(
+                        'assets/icons/record_ic.svg',
+                        width: 60,
+                        height: 60,
+                      ),
                     ),
-                    InkWell(onTap: () {
-                      Get.to(RecoderScreen(), transition: Transition.downToUp);
-                    },
-                    child: SvgPicture.asset('assets/icons/record_ic.svg',
-                    width: 60,
-                    height: 60,
-                    ),
-                    ),
-                    InkWell(onTap: () {
-                      Get.to(RecoderScreen(), transition: Transition.downToUp);
-                    },
-                    child: SvgPicture.asset('assets/icons/record_ic.svg',
-                    width: 60,
-                    height: 60,
-                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(RecoderScreen(),
+                            transition: Transition.downToUp);
+                      },
+                      child: SvgPicture.asset(
+                        'assets/icons/record_ic.svg',
+                        width: 60,
+                        height: 60,
+                      ),
                     )
                   ],
                 )
@@ -237,10 +404,12 @@ class _DiaryEditState extends State<DiaryEdit> {
         return Container(
           height: 250,
           child: CupertinoDatePicker(
-            initialDateTime: DateTime.now(),
+            initialDateTime: widget.selectedDay,
             onDateTimeChanged: (date) {
               var _date = DateFormat('yyyy-MM-dd').format(date).split('-');
+
               setState(() {
+                widget.selectedDay = date;
                 _year = _date[0];
                 _month = _date[1];
                 _day = _date[2];
