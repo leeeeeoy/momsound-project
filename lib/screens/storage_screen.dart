@@ -43,8 +43,10 @@ class _StorageScreenState extends State<StorageScreen> {
                 ),
                 Row(
                   children: [
-                    FlatButton(
-                      color: Colors.white,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                      ),
                       onPressed: () {},
                       child: Text(
                         '검색',
@@ -54,8 +56,10 @@ class _StorageScreenState extends State<StorageScreen> {
                         ),
                       ),
                     ),
-                    FlatButton(
-                      color: Colors.white,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                      ),
                       onPressed: () {
                         if (!editOnOff) {
                           editOnOff = true;
