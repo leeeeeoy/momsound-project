@@ -14,7 +14,7 @@ class HealthButton extends StatelessWidget {
       padding: EdgeInsets.only(top: 0),
       onPressed: () {
         health[selectDay] = [image];
-        health[selectDay].add('?????');
+        health[selectDay]!.add('?????');
 
         print(health[selectDay]);
       },
