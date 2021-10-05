@@ -16,11 +16,11 @@ class DiaryEdit extends StatefulWidget {
   Map<DateTime, List> events;
   DateTime selectedDay;
   Map<DateTime, List> health;
-  int length;
   Map<DateTime, List> diarytext;
+  Map<DateTime, List> feeling;
 
   DiaryEdit(
-      this.events, this.health, this.selectedDay, this.length, this.diarytext);
+      this.events, this.health, this.selectedDay, this.feeling, this.diarytext);
 
   @override
   DiaryEditState createState() => DiaryEditState();
@@ -43,11 +43,8 @@ class DiaryEditState extends State<DiaryEdit> {
     _year = selectDay.year.toString();
     _day = selectDay.day.toString();
     _month = selectDay.month.toString();
-    DiaryScreenState diaryScreen =
-        context.findAncestorStateOfType<DiaryScreenState>();
+    
 
-    int color;
-    String image;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -63,9 +60,9 @@ class DiaryEditState extends State<DiaryEdit> {
               //widget.health.remove(widget.selectedDay);
 
               Navigator.pop(
-                  context, [widget.events, widget.health, widget.diarytext]);
+                  context, [widget.events, widget.health, widget.diarytext,widget.feeling]);
               print("ㅠㅠㅠ이벤트");
-              print(widget.length);
+              
             },
             icon: Icon(Icons.arrow_back)),
         actions: [
@@ -74,8 +71,9 @@ class DiaryEditState extends State<DiaryEdit> {
                 if (widget.events[widget.selectedDay] == null) {
                   widget.events[widget.selectedDay] = [0xffffff];
                 }
+                
                 Navigator.pop(
-                    context, [widget.events, widget.health, widget.diarytext]);
+                    context, [widget.events, widget.health, widget.diarytext,widget.feeling]);
 
                 print(widget.events);
               },
@@ -133,28 +131,43 @@ class DiaryEditState extends State<DiaryEdit> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  EmotionButton(widget.events = widget.events,
-                      selectDay = widget.selectedDay, color = 0xFFE2EAD2),
                   EmotionButton(
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
-                      color = 0xFFD3E7E4),
+                      0xFFE2EAD2,
+                      widget.feeling = widget.feeling,
+                      '무기력'
+                      ),
                   EmotionButton(
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
-                      color = 0xFFD3EBF4),
+                      0xFFD3E7E4,
+                      widget.feeling = widget.feeling,
+                      "분노"),
                   EmotionButton(
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
-                      color = 0xFFD6E2F3),
+                      0xFFD3EBF4,
+                      widget.feeling = widget.feeling,
+                      "예민"),
                   EmotionButton(
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
-                      color = 0xFFD7D5E4),
+                      0xFFD6E2F3,
+                      widget.feeling = widget.feeling,
+                      "감정기복"),
                   EmotionButton(
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
-                      color = 0xFFD7D5EA),
+                      0xFFD7D5E4,
+                      widget.feeling = widget.feeling,
+                      "피곤함"),
+                  EmotionButton(
+                      widget.events = widget.events,
+                      widget.selectedDay = widget.selectedDay,
+                      0xFFD7D5EA,
+                      widget.feeling = widget.feeling,
+                      "불안"),
                 ],
               ),
               SizedBox(
@@ -166,29 +179,37 @@ class DiaryEditState extends State<DiaryEdit> {
                   EmotionButton(
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
-                      color = 0xFFECA8C4),
+                      0xFFECA8C4
+                      ,widget.feeling = widget.feeling,
+                      "우울"),
                   EmotionButton(
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
-                      color = 0xFFEFC2D9),
+                      0xFFEFC2D9,
+                      widget.feeling = widget.feeling,
+                      "평온"),
                   EmotionButton(
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
-                      color = 0xFFF2CDCA),
+                      0xFFF2CDCA,
+                      widget.feeling = widget.feeling,
+                      "설레임"),
                   EmotionButton(
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
-                      color = 0xFFF6E1CD),
-                  EmotionButton(
-                      widget.events = widget.events,
-                      selectDay = selectDay, 
-                      color = 0xFFFBF4D8),
-          
-
+                      0xFFF6E1CD,
+                      widget.feeling = widget.feeling,
+                      "기쁨"),
+                  EmotionButton(widget.events = widget.events,
+                      selectDay = selectDay, 0xFFFBF4D8,
+                      widget.feeling = widget.feeling,
+                      "활기찬"),
                   EmotionButton(
                       widget.events = widget.events,
                       widget.selectedDay = widget.selectedDay,
-                      color = 0XFFFFFFFF),
+                      0XFFFFFFFF,
+                      widget.feeling = widget.feeling,
+                      "기본"),
                 ],
               ),
             ],
@@ -212,31 +233,31 @@ class DiaryEditState extends State<DiaryEdit> {
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 40.svg'),
+                      'assets/icons/Frame 40.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 41.svg'),
+                      'assets/icons/Frame 41.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 42.svg'),
+                      'assets/icons/Frame 42.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 42.svg'),
+                      'assets/icons/Frame 42.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 43.svg'),
+                      'assets/icons/Frame 43.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 44.svg'),
+                      'assets/icons/Frame 44.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 51.svg'),
+                      'assets/icons/Frame 51.svg'),
                 ],
               ),
               SizedBox(
@@ -248,31 +269,31 @@ class DiaryEditState extends State<DiaryEdit> {
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 45.svg'),
+                      'assets/icons/Frame 45.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 46.svg'),
+                      'assets/icons/Frame 46.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 47.svg'),
+                      'assets/icons/Frame 47.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 48.svg'),
+                      'assets/icons/Frame 48.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 49.svg'),
+                      'assets/icons/Frame 49.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 52.svg'),
+                      'assets/icons/Frame 52.svg'),
                   HealthButton(
                       widget.health = widget.health,
                       widget.selectedDay = widget.selectedDay,
-                      image = 'assets/icons/Frame 50.svg'),
+                      'assets/icons/Frame 50.svg'),
                 ],
               ),
             ],
@@ -298,13 +319,7 @@ class DiaryEditState extends State<DiaryEdit> {
                     });
                   },
                 ),
-                // Text(widget.diarytext)
-                // TextFormField(
-                //   onChanged: (nextText) {
-                //     setState(() {
-                //       _dText = nextText;
-                //     });
-                //   },
+               
               ],
             ),
           ),

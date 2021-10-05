@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:momsori/screens/diary_edit.dart';
-import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DiaryScreen extends StatefulWidget {
@@ -21,19 +20,12 @@ class DiaryScreenState extends State<DiaryScreen> {
   CalendarBuilders calendarBuilders = CalendarBuilders();
   Map<DateTime, List> events;
   Map<DateTime, List> health;
-  int length;
   Map<DateTime, List> diarytext;
+  Map<DateTime, List> feeling;
+
   List<dynamic> _selectedEvents;
 
-  // void edit() {
-  //   if (events[selectedDay] != null) {
-  //     events[selectedDay].add('dfgfdg');
-  //   } else {
-  //     events[selectedDay] = ['0xFFD3E7E4'];
-  //     print('추가됨');
-  //     print(events[selectedDay]);
-  //   }
-  // }
+ 
 
   List<dynamic> getEventsForDays(DateTime day) {
     return events[day] ?? [];
@@ -45,14 +37,20 @@ class DiaryScreenState extends State<DiaryScreen> {
     super.initState();
     calendarBuilders = CalendarBuilders();
     events = {
-      DateTime.utc(2021, 10, 11): [0xFFD3E7E4],
-      DateTime.utc(2021, 10, 15): [0xFFD3E7E4],
+      DateTime.utc(2021, 10, 3): [0xFFD3E7E4],
+      DateTime.utc(2021, 10, 1): [0xFFD6E2F3],
     };
     health = {
-      DateTime.utc(2021, 9, 11): ['assets/icons/Frame 40.svg']
+      DateTime.utc(2021, 10, 3): ['assets/icons/Frame 40.svg','?????'],
+      DateTime.utc(2021, 10, 1): ['assets/icons/Frame 40.svg','?????']
+    };
+    feeling = {
+      DateTime.utc(2021, 10, 3): ['우울'],
+      DateTime.utc(2021, 10, 1): ['무기력'],
     };
     diarytext = {
-      DateTime.utc(2021, 9, 11): ['assets/icons/Frame 40.svg']
+      DateTime.utc(2021, 10, 3): ['하루종일 비가온다 '],
+      DateTime.utc(2021, 10, 1): ['하루종일 비가온다 비가온다아ㅏㅇ'],
     };
     _selectedEvents = [];
     // edit();
@@ -143,30 +141,11 @@ class DiaryScreenState extends State<DiaryScreen> {
                 return isSameDay(selectedDay, date);
               },
 
-              // event----------------------------------
-              // calendarBuilders: CalendarBuilders(singleMarkerBuilder: (
-              //   context,
-              //   date,
-              //   _event,
-              // ) {
-              //   return Container(
-              //     width: 45,
-              //     height: 45,
-              //     decoration: BoxDecoration(
-              //         //backgroundBlendMode: BlendMode. ,
-              //         color: Color(0xFF8041D9),
-              //         // borderRadius: BorderRadius.all(Radius.circular(20)
-              //         // )
-              //         shape: BoxShape.circle),
-              //     child: Center(child: Text(date.day.toString())),
-              //   );
-              // }),
+           
 
               calendarBuilders: makemarkerbuilder(events),
 
-              // eventLoader: (days){
-              //   return _getEventsForDays(days);
-              // },
+           
               eventLoader: getEventsForDays,
 
               onDaySelected: (DateTime selectDay, DateTime focusDay) {
@@ -186,17 +165,34 @@ class DiaryScreenState extends State<DiaryScreen> {
                     colors = events[selectDay][0];
                   }
                   String healthIcon;
+                  String healthText;
                   if (health[selectDay] == null) {
                     healthIcon = ' ';
+                    healthText = ' ';
                   } else {
                     healthIcon = health[selectedDay][0];
-                    //healthIcon = events[selectedDay][1];
+                    healthText = health[selectedDay][1];
                   }
+
+                  // String healthText;
+                  // if (health[selectedDay][1] == null) {
+                  //  // healthText = ' ';
+                  //   health[selectDay][1] = ' ';
+                  // } else {
+                  //   healthText = health[selectedDay][1];
+                  // }
+
                   String diaryText;
                   if (diarytext[selectDay] == null) {
                     diaryText = ' ';
                   } else {
                     diaryText = diarytext[selectedDay][0];
+                  }
+                  String Feeling;
+                  if (feeling[selectDay] == null) {
+                    Feeling = ' ';
+                  } else {
+                    Feeling = feeling[selectedDay][0];
                   }
 
                   showModalBottomSheet(
@@ -262,18 +258,38 @@ class DiaryScreenState extends State<DiaryScreen> {
                                     ),
                                     Row(
                                       children: [
-                                        Icon(
-                                          Icons.circle,
-                                          color: Color(colors),
-                                          size: 36,
+                                        Column(
+                                          children: [
+                                            Icon(
+                                              Icons.circle,
+                                              color: Color(colors),
+                                              size: 36,
+                                            ),
+                                            Text(
+                                              Feeling,
+                                              style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          ],
                                         ),
                                         SizedBox(
                                           width: 10,
                                         ),
-                                        SvgPicture.asset(
-                                          healthIcon,
-                                          width: 36,
-                                          height: 36,
+                                        Column(
+                                          children: [
+                                            SvgPicture.asset(
+                                              healthIcon,
+                                              width: 36,
+                                              height: 36,
+                                            ),
+                                            Text(
+                                              healthText,
+                                              style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -378,6 +394,7 @@ class DiaryScreenState extends State<DiaryScreen> {
                                           Row(
                                             children: [
                                               Text(diaryText),
+                                              //Text(feeling[selectedDay][0])
                                             ],
                                           )
                                         ],
@@ -424,15 +441,17 @@ class DiaryScreenState extends State<DiaryScreen> {
                                   events = events,
                                   health = health,
                                   selectedDay = selectedDay,
-                                  length = events.length,
+                                  feeling = feeling,
                                   diarytext = diarytext,
                                 )));
                     setState(() {
                       events = eventsdata[0];
                       health = eventsdata[1];
                       diarytext = eventsdata[2];
+                      feeling = eventsdata[3];
                       print('다이어리스키이이이이인');
                       print(events);
+                      print(health);
                       print(selectedDay);
                     });
                   },
