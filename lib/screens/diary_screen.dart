@@ -11,9 +11,12 @@ class DiaryScreen extends StatefulWidget {
   DiaryScreenState createState() => DiaryScreenState();
 }
 
-class DiaryScreenState extends State<DiaryScreen> {
-  DateTime selectedDay;
-  DateTime focusedDay;
+class _DiaryScreenState extends State<DiaryScreen> {
+  //event
+  // Map<DateTime, List<Event>> selectedEvents;
+
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now();
 
   var today = DateTime.now().toString().split(' ')[0].split('-');
 
@@ -60,8 +63,8 @@ class DiaryScreenState extends State<DiaryScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    _eventController.dispose();
+
+    //  _eventController.dispose();
     super.dispose();
   }
 
@@ -143,32 +146,6 @@ class DiaryScreenState extends State<DiaryScreen> {
                 return isSameDay(selectedDay, date);
               },
 
-              // event----------------------------------
-              // calendarBuilders: CalendarBuilders(singleMarkerBuilder: (
-              //   context,
-              //   date,
-              //   _event,
-              // ) {
-              //   return Container(
-              //     width: 45,
-              //     height: 45,
-              //     decoration: BoxDecoration(
-              //         //backgroundBlendMode: BlendMode. ,
-              //         color: Color(0xFF8041D9),
-              //         // borderRadius: BorderRadius.all(Radius.circular(20)
-              //         // )
-              //         shape: BoxShape.circle),
-              //     child: Center(child: Text(date.day.toString())),
-              //   );
-              // }),
-
-              calendarBuilders: makemarkerbuilder(events),
-
-              // eventLoader: (days){
-              //   return _getEventsForDays(days);
-              // },
-              eventLoader: getEventsForDays,
-
               onDaySelected: (DateTime selectDay, DateTime focusDay) {
                 setState(() {
                   var year = focusDay.year;
@@ -177,27 +154,6 @@ class DiaryScreenState extends State<DiaryScreen> {
                   var week = selectDay.weekday;
                   selectedDay = selectDay;
                   focusedDay = focusDay;
-                  _selectedEvents = getEventsForDays(selectedDay);
-                  int colors;
-                  if (events[selectDay] == null) {
-                    colors = 0xffffffff;
-                    // colors = 0xFFF2CDCA;
-                  } else {
-                    colors = events[selectDay][0];
-                  }
-                  String healthIcon;
-                  if (health[selectDay] == null) {
-                    healthIcon = ' ';
-                  } else {
-                    healthIcon = health[selectedDay][0];
-                    //healthIcon = events[selectedDay][1];
-                  }
-                  String diaryText;
-                  if (diarytext[selectDay] == null) {
-                    diaryText = ' ';
-                  } else {
-                    diaryText = diarytext[selectedDay][0];
-                  }
 
                   showModalBottomSheet(
                     context: context,
@@ -264,14 +220,14 @@ class DiaryScreenState extends State<DiaryScreen> {
                                       children: [
                                         Icon(
                                           Icons.circle,
-                                          color: Color(colors),
+                                          color: Color(0xFFD3E7E4),
                                           size: 36,
                                         ),
                                         SizedBox(
                                           width: 10,
                                         ),
                                         SvgPicture.asset(
-                                          healthIcon,
+                                          'assets/icons/Frame 40.svg',
                                           width: 36,
                                           height: 36,
                                         ),
@@ -450,100 +406,6 @@ class DiaryScreenState extends State<DiaryScreen> {
     );
   }
 
-  dynamic makemarkerbuilder(Map<DateTime, List> events) {
-    return CalendarBuilders(singleMarkerBuilder: (
-      context,
-      date,
-      _event,
-    ) {
-      // int colors;
-      // if (events[date][0] == null) {
-      //   //colors = 0xfffffff;
-      //   events[date][0] = 0xFFF2CDCA;
-      //   print("양아아ㅏ아아앚");
-      //   print(events[date]);
-      // }
-
-      // if (events[date] == null) {
-      //   setState(() {
-      //     events[date] = [0xfffffff];
-      //   });
-      // }
-      if (health[date] == null) {
-        return Container(
-          width: 45,
-          height: 45,
-          decoration: BoxDecoration(
-              //backgroundBlendMode: BlendMode. ,
-              color: Color(events[date][0]),
-              // borderRadius: BorderRadius.all(Radius.circular(20)
-              // )
-              shape: BoxShape.circle),
-          child: Center(child: Text(date.day.toString())),
-        );
-      }
-
-      return Stack(
-        children: [
-          Container(
-            width: 45,
-            height: 45,
-            decoration: BoxDecoration(
-                //backgroundBlendMode: BlendMode. ,
-                color: Color(events[date][0]),
-                // borderRadius: BorderRadius.all(Radius.circular(20)
-                // )
-                shape: BoxShape.circle),
-            child: Center(child: Text(date.day.toString())),
-          ),
-          Container(
-            width: 20,
-            height: 20,
-            child: SvgPicture.asset(health[date][0]),
-          ),
-        ],
-      );
-    });
-  }
-}
-
-// dynamic makemarkerbuilder() {
-//     // ignore: missing_return
-//     return CalendarBuilders(singleMarkerBuilder: (
-//       context,
-//       date,
-//       _event,
-//     ) {
-//       if(events[selectedDay]==null){
-//       return Container(
-//         width: 45,
-//         height: 45,
-//         decoration: BoxDecoration(
-//             //backgroundBlendMode: BlendMode. ,
-//             color: Color(events[date][0]),
-//             // borderRadius: BorderRadius.all(Radius.circular(20)
-//             // )
-//             shape: BoxShape.circle),
-//         child: Center(child: Text(date.day.toString())),
-//       );
-//       }else{
-
-//     return Container(
-//         width: 10,
-//         height: 10,
-//         decoration: BoxDecoration(
-//             //backgroundBlendMode: BlendMode. ,
-//             color: Color(0xff000000),
-//             // borderRadius: BorderRadius.all(Radius.circular(20)
-//             // )
-//             shape: BoxShape.circle),
-//         child: Center(child: Text(date.day.toString())),
-//       );
-//       }
-//     });
-//   }
-// }
-
 Widget _buildEventsMarker(DateTime date) {
   return AnimatedContainer(
     duration: const Duration(milliseconds: 300),
@@ -551,7 +413,7 @@ Widget _buildEventsMarker(DateTime date) {
     alignment: Alignment.center,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(36.0),
-        border: Border.all(width: 2, color: Colors.blue[300])),
+        border: Border.all(width: 2, color: Colors.blue[300]!)),
   );
 }
 

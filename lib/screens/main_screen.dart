@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:momsori/models/user_test.dart';
+import 'package:get/get.dart';
 import 'package:momsori/screens/diary_screen.dart';
 import 'package:momsori/screens/home_screen.dart';
 import 'package:momsori/screens/storage_screen.dart';
 
 import 'taedam_screen.dart';
-
-UserTest user;
 
 class MainScreen extends StatefulWidget {
   @override
@@ -23,6 +22,9 @@ class _MainScreenState extends State<MainScreen> {
     // jsonData = Get.arguments;
     // user = UserTest.fromJson(jsonData);
     super.initState();
+    if (Get.arguments != null) {
+      _selectedIndex = Get.arguments;
+    }
   }
 
   @override
@@ -31,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
       child: Scaffold(
         bottomNavigationBar: BottomAppBar(
           child: Container(
-            height: 70,
+            height: 48.h,
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(

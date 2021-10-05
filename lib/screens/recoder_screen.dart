@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:momsori/getx_controller/record_state_controller.dart';
-import 'package:momsori/getx_controller/record_time_controller.dart';
-import 'package:momsori/utils/record_sound.dart';
+import 'package:momsori/getx_controller/record_sound_controller.dart';
 import 'package:momsori/utils/record_state.dart';
 import 'package:momsori/widgets/contants.dart';
 import 'package:momsori/widgets/record_buttons/pause_button.dart';
@@ -12,83 +11,93 @@ import 'package:momsori/widgets/record_buttons/prepare_play_button.dart';
 import 'package:momsori/widgets/record_buttons/prepare_record_button.dart';
 import 'package:momsori/widgets/record_buttons/recording_button.dart';
 
-RecordSound rs = RecordSound();
-final recordStateController = Get.put(RecordStateController());
-final recordTimeController = Get.put(RecordTimeController());
-
 class RecoderScreen extends StatefulWidget {
   @override
   _RecoderScreenState createState() => _RecoderScreenState();
 }
 
 class _RecoderScreenState extends State<RecoderScreen> {
+  final recordSoundController = Get.put<RecordSoundController>(
+    RecordSoundController(),
+    tag: 'recordSound',
+  );
+
   @override
   void initState() {
-    rs.initSound();
     super.initState();
   }
 
   @override
   void dispose() {
-    rs.disposeSound();
-    recordStateController.changePrepareRecord();
     super.dispose();
+    recordSoundController.resetRecordTime();
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         body: Padding(
           padding: EdgeInsets.all(10),
-          child: Center(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                          height: 50,
-                          width: 40,
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 40,
+                        child: Icon(
+                          Icons.arrow_back_ios,
                         ),
                       ),
                     ),
-                    Text('녹음', style: kTitleStyle),
-                  ],
-                ),
-                SvgPicture.asset(
-                  'assets/images/check.svg',
-                  height: 0.65 * height,
-                ),
-                GetBuilder(
-                  init: recordStateController,
-                  builder: (_) {
-                    if (_.recordState == RecordState.prepareRecord) {
-                      return prepareRecordButton(context);
-                    } else if (_.recordState == RecordState.recording) {
-                      return recordingButton(context);
-                    } else if (_.recordState == RecordState.pause) {
-                      return pauseButton(context);
-                    } else if (_.recordState == RecordState.preparePlay) {
-                      return preparePlayButton(context);
+                  ),
+                  Text(
+                    '녹음',
+                    style: kTitleStyle,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 64.h,
+              ),
+              SvgPicture.asset(
+                'assets/images/check.svg',
+                height: 300.h,
+                width: 300.w,
+              ),
+              SizedBox(
+                height: 30.h,
+              ),
+              Expanded(
+                child: Obx(
+                  () {
+                    if (recordSoundController.recordState.value ==
+                        RecordState.prepareRecord) {
+                      return PrepareRecordButton();
+                    } else if (recordSoundController.recordState.value ==
+                        RecordState.recording) {
+                      return RecordingButton();
+                    } else if (recordSoundController.recordState.value ==
+                        RecordState.preparePlay) {
+                      return PreparePlayingButton();
+                    } else if (recordSoundController.recordState.value ==
+                        RecordState.pause) {
+                      return PauseButton();
                     } else {
-                      return playingButton(context);
+                      return PlayingButton();
                     }
                   },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
