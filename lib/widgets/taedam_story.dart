@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 var titleTextStyle = TextStyle(
@@ -32,8 +33,8 @@ var taedamStory1 = [
     aspectRatio: 16 / 9,
     child: SvgPicture.asset(
       'assets/images/check.svg',
-      height: 100,
-      width: 100,
+      height: 100.h,
+      width: 100.w,
       fit: BoxFit.cover,
     ),
   ),

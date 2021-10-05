@@ -114,9 +114,9 @@ class _StorageScreenState extends State<StorageScreen> {
                   ),
                   selected: _ischecked,
                   activeColor: Color.fromARGB(255, 255, 169, 169),
-                  onChanged: (bool value) {
+                  onChanged: (value) {
                     setState(() {
-                      _ischecked = value;
+                      _ischecked = value!;
                     });
                   },
                 ),
@@ -143,9 +143,9 @@ class _StorageScreenState extends State<StorageScreen> {
                   ),
                   selected: _ischecked,
                   activeColor: Color.fromARGB(255, 255, 169, 169),
-                  onChanged: (bool value) {
+                  onChanged: (value) {
                     setState(() {
-                      _ischecked = value;
+                      _ischecked = value!;
                     });
                   },
                 ),
@@ -162,13 +162,15 @@ class _StorageScreenState extends State<StorageScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                child: FlatButton(
+                child: TextButton(
                   onPressed: () {},
+                  child: Text('TextButton'),
                 ),
               ),
               Container(
-                child: FlatButton(
+                child: TextButton(
                   onPressed: () {},
+                  child: Text('TextButton'),
                 ),
               ),
             ],
@@ -191,7 +193,7 @@ class _StorageScreenState extends State<StorageScreen> {
                               height: 300,
                               child: TextFormField(
                                 validator: (value) {
-                                  if (value.isEmpty) {
+                                  if (value!.isEmpty) {
                                     return '이름을 입력해 주세요.';
                                   } else {
                                     return null;
@@ -216,7 +218,7 @@ class _StorageScreenState extends State<StorageScreen> {
                             ),
                             CupertinoDialogAction(
                               onPressed: () {
-                                if (_formKey.currentState.validate()) {
+                                if (_formKey.currentState!.validate()) {
                                   Scaffold.of(context).showSnackBar(SnackBar(
                                       content: Text('Processing Data')));
                                 }

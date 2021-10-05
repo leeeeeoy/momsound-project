@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class RecordListController extends GetxController {
-  List<String> category = [
+  List<String> categories = [
     '카테고리1',
     '카테고리2',
     '카테고리3',
@@ -15,13 +15,26 @@ class RecordListController extends GetxController {
     '+ 카테고리 추가',
   ];
 
+  int categoryIndex = 0;
+  String category = '전체 ▼';
+
   addList(String newCategory) {
-    category.add(newCategory);
+    categories.add(newCategory);
     update();
   }
 
   deleteList() {
-    category.removeLast();
+    categories.removeLast();
+    update();
+  }
+
+  changeIndex(int index) {
+    categoryIndex = index;
+    update();
+  }
+
+  changeCategory(String newCategory) {
+    category = newCategory;
     update();
   }
 }
