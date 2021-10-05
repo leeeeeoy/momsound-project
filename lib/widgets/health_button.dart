@@ -12,6 +12,7 @@ class HealthButton extends StatelessWidget {
     this.selectDay,
     this.image
   );
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -19,6 +20,8 @@ class HealthButton extends StatelessWidget {
       padding: EdgeInsets.only(top: 0),
       onPressed: () {
         health[selectDay] = [image];
+        health[selectDay]!.add('?????');
+
 
         print(health[selectDay]);
       },

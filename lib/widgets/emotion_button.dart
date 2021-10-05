@@ -7,8 +7,9 @@ class EmotionButton extends StatelessWidget {
   Map<DateTime, List> events;
   DateTime selectDay;
   int color;
+  EmotionButton(
+      this.events, this.selectDay, this.color, this.feeling, this.feelingText);
 
-  EmotionButton(this.events, this.selectDay, this.color);
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +17,12 @@ class EmotionButton extends StatelessWidget {
       constraints: BoxConstraints(),
       padding: EdgeInsets.only(top: 0),
       onPressed: () {
-        
         events[selectDay] = [color];
-        
+        feeling[selectDay] = [feelingText];
+        print('하하하하');
+
         print(events[selectDay]);
+        print(feeling[selectDay]);
       },
       icon: Icon(
         Icons.circle,
