@@ -26,6 +26,7 @@ class DiaryScreenState extends State<DiaryScreen> {
   late Map<DateTime, List> diarytext;
   late Map<DateTime, List> feeling;
 
+
   late List<dynamic> _selectedEvents;
 
  
@@ -169,23 +170,17 @@ class DiaryScreenState extends State<DiaryScreen> {
                   } else {
                     colors = events[selectDay]![0];
                   }
-                  String healthIcon;
                   String healthText;
+                  String healthIcon;
                   if (health[selectDay] == null) {
                     healthIcon = ' ';
-                    healthText = ' ';
+                    healthText= ' ';
                   } else {
                     healthIcon = health[selectedDay]![0];
                     healthText = health[selectedDay]![1];
                   }
-
-                  // String healthText;
-                  // if (health[selectedDay][1] == null) {
-                  //  // healthText = ' ';
-                  //   health[selectDay][1] = ' ';
-                  // } else {
-                  //   healthText = health[selectedDay][1];
-                  // }
+               
+                  
 
                   String diaryText;
                   if (diarytext[selectDay] == null) {
@@ -199,6 +194,7 @@ class DiaryScreenState extends State<DiaryScreen> {
                   } else {
                     Feeling = feeling[selectedDay]![0];
                   }
+                  
 
 
                   showModalBottomSheet(
@@ -219,7 +215,7 @@ class DiaryScreenState extends State<DiaryScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
-                                    padding: const EdgeInsets.only(left: 30),
+                                    padding: const EdgeInsets.only(left: 20),
                                     // child: Text(
                                     //   today[1] + '/' + today[2],
                                     //   style: TextStyle(
@@ -246,7 +242,7 @@ class DiaryScreenState extends State<DiaryScreen> {
                                 ],
                               ),
                               Container(
-                                padding: EdgeInsets.only(left: 20, top: 5),
+                                padding: EdgeInsets.only(left: 20, top: 5,right: 20, bottom: 20),
                                 child: Column(
                                   children: [
                                     Row(
@@ -326,23 +322,26 @@ class DiaryScreenState extends State<DiaryScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Column(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    'assets/icons/play_arrow-24px_3.svg',
-                                                    width: 36,
-                                                  ),
-                                                  Container(
-                                                    width: 100,
-                                                    child: Text(
-                                                      '열자를 넘게하면 이렇게 됨!',
-                                                      style: TextStyle(
-                                                          fontSize: 10),
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
+                                              InkWell(
+                                                onTap: () {},
+                                                child: Column(
+                                                  children: [
+                                                    SvgPicture.asset(
+                                                      'assets/icons/play_arrow-24px_3.svg',
+                                                      width: 36,
                                                     ),
-                                                  )
-                                                ],
+                                                    Container(
+                                                      width: 100,
+                                                      child: Text(
+                                                        '열자를 넘게하면 이렇게 됨!',
+                                                        style: TextStyle(
+                                                            fontSize: 10),
+                                                        overflow:
+                                                            TextOverflow.ellipsis,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                               Column(
                                                 children: [
@@ -400,24 +399,31 @@ class DiaryScreenState extends State<DiaryScreen> {
                                               )
                                             ],
                                           ),
-                                          //TextField()
-                                          Row(
-                                            children: [
-                                              Text(diaryText),
-                                              //Text(feeling[selectedDay][0])
-                                            ],
-                                          )
+                                          SizedBox(
+                                            height: 7,
+                                          ),
+                                         
+                                          Container(
+                                            //color: Color(0xFFE5E5E5),
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFE5E5E5),
+                                              borderRadius: BorderRadius.circular(5)
+                                              
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(diaryText,),
+                                            )
+                                            ),
+                                          
+                                          
                                         ],
                                       ),
                                     )
                                   ],
                                 ),
                               ),
-                              // ..._getEventsfromDay(selectedDay).map(
-                              //   (Event event) => ListTile(
-                              //     title: Text(event.title),
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),
@@ -459,7 +465,6 @@ class DiaryScreenState extends State<DiaryScreen> {
                       health = eventsdata[1];
                       diarytext = eventsdata[2];
                       feeling = eventsdata[3];
-                      print('다이어리스키이이이이인');
                       print(events);
                       print(health);
                       print(selectedDay);
