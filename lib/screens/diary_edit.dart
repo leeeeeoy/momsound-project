@@ -7,6 +7,8 @@ import 'package:momsori/widgets/emotion_button.dart';
 import 'package:momsori/widgets/health_button.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class DiaryEdit extends StatefulWidget {
   // DiaryEdit(Map<DateTime, List> events, [DateTime selectedday]);
@@ -37,6 +39,8 @@ class DiaryEditState extends State<DiaryEdit> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     DateTime selectDay = widget.selectedDay;
     _year = selectDay.year.toString();
     _day = selectDay.day.toString();
@@ -62,7 +66,8 @@ class DiaryEditState extends State<DiaryEdit> {
                   widget.events,
                   widget.health,
                   widget.diarytext,
-                  widget.feeling
+                  widget.feeling,
+                  widget.selectedDay
                 ]);
                 print("ㅠㅠㅠ이벤트");
               },
@@ -78,7 +83,8 @@ class DiaryEditState extends State<DiaryEdit> {
                     widget.events,
                     widget.health,
                     widget.diarytext,
-                    widget.feeling
+                    widget.feeling,
+                    widget.selectedDay
                   ]);
 
                   print(widget.events);
@@ -86,21 +92,21 @@ class DiaryEditState extends State<DiaryEdit> {
                 child: Text(
                   '확인',
                   style: TextStyle(
-                      fontSize: 18,
+                      fontSize: width*0.044,
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ))
           ],
         ),
         body: Padding(
-          padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+          padding: EdgeInsets.fromLTRB(width*0.024, height*0.007, width*0.024, height*0.007),
           child: ListView(children: [
             Row(
               children: [
                 Container(
                   //width: double.maxFinite,
-                  width: 390,
-                  height: 50,
+                  width: width*0.95,
+                  height: height*0.073,
                   child: ElevatedButton(
                     onPressed: () {
                       _myDatePicker();
@@ -109,7 +115,7 @@ class DiaryEditState extends State<DiaryEdit> {
                       '$_year 년 $_month 월 $_day 일',
                       // '$widget.selectedDay',
                       style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: width*0.048,
                           fontWeight: FontWeight.normal,
                           color: Colors.black),
                     ),
@@ -122,12 +128,12 @@ class DiaryEditState extends State<DiaryEdit> {
               ],
             ),
             Container(
-              padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10),
+              padding:  EdgeInsets.only(top: 10.h, bottom: 10.h, left: 10.w),
               child: Row(
                 children: [
                   Text(
                     '감정상태',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: width*0.044),
                   )
                 ],
               ),
@@ -176,7 +182,7 @@ class DiaryEditState extends State<DiaryEdit> {
                   ],
                 ),
                 SizedBox(
-                  height: 18,
+                  height: height*0.026,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -222,12 +228,12 @@ class DiaryEditState extends State<DiaryEdit> {
               ],
             ),
             Container(
-              padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10),
+              padding:  EdgeInsets.only(top: 10.h, bottom: 10.h, left: 10.w),
               child: Row(
                 children: [
                   Text(
                     '건강상태',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: width*0.044),
                   )
                 ],
               ),
@@ -241,8 +247,7 @@ class DiaryEditState extends State<DiaryEdit> {
                         widget.health = widget.health,
                         widget.selectedDay = widget.selectedDay,
                         'assets/icons/1.svg',
-                        healthtext = '괜찮음'
-                        ),
+                        healthtext = '괜찮음'),
                     HealthButton(
                         widget.health = widget.health,
                         widget.selectedDay = widget.selectedDay,
@@ -276,7 +281,7 @@ class DiaryEditState extends State<DiaryEdit> {
                   ],
                 ),
                 SizedBox(
-                  height: 18,
+                  height: height*0.026,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -304,7 +309,7 @@ class DiaryEditState extends State<DiaryEdit> {
                     HealthButton(
                         widget.health = widget.health,
                         widget.selectedDay = widget.selectedDay,
-                        'assets/icons/Frame 49.svg',
+                        'assets/icons/Frame 48.svg',
                         healthtext = '요통'),
                     HealthButton(
                         widget.health = widget.health,
@@ -321,7 +326,7 @@ class DiaryEditState extends State<DiaryEdit> {
               ],
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(width*0.024),
               child: Column(
                 children: [
                   Row(
@@ -329,13 +334,13 @@ class DiaryEditState extends State<DiaryEdit> {
                       Text(
                         '메모',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: width*0.044,
                         ),
                       )
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: width*0.024,
                   ),
 
                   Container(
@@ -352,7 +357,7 @@ class DiaryEditState extends State<DiaryEdit> {
                       maxLines: null,
                       cursorColor: Color(0xFFFFA9A9),
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(5),
+                        contentPadding: EdgeInsets.all(width*0.012),
                         hintText: "메모를 입력하세요.",
                         hintStyle: TextStyle(color: Colors.grey[500]),
                         filled: true,
@@ -362,28 +367,11 @@ class DiaryEditState extends State<DiaryEdit> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 0,
-                  ),
-
-                  //  Container(
-                  //     height: 100,
-                  //     alignment: Alignment.center,
-                  //     decoration: BoxDecoration(
-                  //         color: Colors.grey[200],
-                  //         border: Border(
-                  //             bottom: BorderSide(
-                  //                 width: 2,
-                  //                 color: Color.fromARGB(255, 255, 169, 169),
-                  //              )
-                  //           )
-                  //      ),
-                  //   ),
                 ],
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(width*0.024),
               child: Column(
                 children: [
                   Row(
@@ -391,13 +379,13 @@ class DiaryEditState extends State<DiaryEdit> {
                       Text(
                         '녹음',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: width*0.044,
                         ),
                       )
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: height*0.022,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -409,8 +397,8 @@ class DiaryEditState extends State<DiaryEdit> {
                         },
                         child: SvgPicture.asset(
                           'assets/icons/record_ic.svg',
-                          width: 60,
-                          height: 60,
+                          width: width*0.146,
+                          height: width*0.146,
                         ),
                       ),
                       InkWell(
@@ -420,8 +408,8 @@ class DiaryEditState extends State<DiaryEdit> {
                         },
                         child: SvgPicture.asset(
                           'assets/icons/record_ic.svg',
-                          width: 60,
-                          height: 60,
+                          width: width*0.146,
+                          height: width*0.146,
                         ),
                       ),
                       InkWell(
@@ -431,8 +419,8 @@ class DiaryEditState extends State<DiaryEdit> {
                         },
                         child: SvgPicture.asset(
                           'assets/icons/record_ic.svg',
-                          width: 60,
-                          height: 60,
+                          width: width*0.146,
+                          height: width*0.146,
                         ),
                       )
                     ],
@@ -453,12 +441,22 @@ class DiaryEditState extends State<DiaryEdit> {
         return Container(
           height: 250,
           child: CupertinoDatePicker(
+            use24hFormat: true,
             initialDateTime: widget.selectedDay,
-            onDateTimeChanged: (date) {
-              var _date = DateFormat('yyyy-MM-dd').format(date).split('-');
+            onDateTimeChanged: (DateTime date) {
+              var _date =
+                  DateFormat('yyyy-MM-dd 00:00:000').format(date).split('-');
+              var date1 = DateFormat("yyyy-MM-dd HH:mm:ss.sss'Z'").format(date);
+              print("date1은???" + date1);
+              date = DateTime.parse(date1);
+
+
+              //date = DateTime.parse('2020-01-02 03:04:000');
 
               setState(() {
+                print(widget.selectedDay);
                 widget.selectedDay = date;
+                print(widget.selectedDay);
                 _year = _date[0];
                 _month = _date[1];
                 _day = _date[2];
